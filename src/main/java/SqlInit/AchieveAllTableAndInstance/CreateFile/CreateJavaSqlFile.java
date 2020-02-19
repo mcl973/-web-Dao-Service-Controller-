@@ -76,7 +76,7 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         String introduce ="/*单个查询，输出匹配的所有的值，只能单个匹配\n 参数为需要匹配的值，只传入值*/\n";
         String MethodBody = introduce+"public Map<String,"+classname+"> SelectFor"+methodfield+"("+fieldmap.get(methodfield)+" methodfield_) throws Exception{\n";
         MethodBody+="  Map<String,"+classname+"> classmap = new HashMap<>();\n";
-        String sql = "select * from "+classname+" where "+methodfield+"="+"\" +methodfield_+\";";
+        String sql = "select * from "+classname+" where "+methodfield+"="+"\\\"\" +methodfield_+\"\\\";";
         MethodBody+="  ResultSet resultSet = statement.executeQuery" +
             "(\""+sql+"\");\n";
         MethodBody+="  int m = 0;\n";

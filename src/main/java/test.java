@@ -16,11 +16,15 @@ import ScannerAndInstance.HandleRouteMappEvent.HandleRouteMapping;
 import ScannerAndInstance.HanleAopEvent.HandleAopBean;
 import ScannerAndInstance.Instance.InstanceBean;
 import ScannerAndInstance.Scanner.Scanner;
+import SqlInit.AchieveAllTableAndInstance.AchieveAllTable;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.CreateMySqlNewFile;
+import SqlInit.AchieveAllTableAndInstance.Table;
 import SqlInit.SqlFind.MySqlInit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.community;
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
@@ -57,15 +61,15 @@ public class test  {
         return result;
     }
     public static void main(String[] args) throws Exception {
-//        String[] sqlparam = {"com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mao",
-//        "root","root"};
-//        new MySqlInit(sqlparam);
-//            AchieveAllTable achieveAllTable = new AchieveAllTable();
-//            Map<String, Table> tableField = achieveAllTable.getTableField(achieveAllTable.getTable());
-//            CreateMySqlNewFile createMySqlNewFile = new CreateMySqlNewFile();
-//            for(Map.Entry<String,Table> map:tableField.entrySet()){
-//                createMySqlNewFile.instance(map.getValue().getTablename(),map.getValue().getMap());
-//            }
+        String[] sqlparam = {"com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mao",
+        "root","root"};
+        new MySqlInit(sqlparam);
+            AchieveAllTable achieveAllTable = new AchieveAllTable();
+            Map<String, Table> tableField = achieveAllTable.getTableField(achieveAllTable.getTable());
+            CreateMySqlNewFile createMySqlNewFile = new CreateMySqlNewFile();
+            for(Map.Entry<String,Table> map:tableField.entrySet()){
+                createMySqlNewFile.instance(map.getValue().getTablename(),map.getValue().getMap());
+            }
 
 
 //        test1.testProxyGenetate();

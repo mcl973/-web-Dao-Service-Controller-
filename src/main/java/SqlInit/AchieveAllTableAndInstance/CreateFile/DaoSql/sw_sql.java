@@ -1,130 +1,123 @@
 package SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql;
 
- import SqlInit.AbstractSql;
-
- import java.sql.ResultSet;
-
- import java.util.Map;
-
- import java.util.HashMap;
-
- import java.util.HashMap;
-
- import java.lang.reflect.Field;
-
- import Annotation_Collection.Sql.*;
-
- import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.sw;
+import Annotation_Collection.Sql.DaoSql;
+import SqlInit.AbstractSql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.sw;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.TypeTrans;
 
+import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+
 /*本程序框架代码由自动生成*/
-@DaoSql("sw_sql")public class sw_sql extends AbstractSql{
+@DaoSql("sw_sql")public class sw_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,sw> SelectForrequired_bw(String methodfield_) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where required_bw=" +methodfield_+";");
+public Map<String, sw> SelectForrequired_bw(String methodfield_) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from sw where required_bw=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
 String var0 = resultSet.getString("required_bw");
-cn.setrequired_bw((String)TypeTrans.getvalue("String",var0));
+cn.setrequired_bw((String) TypeTrans.getvalue("String",var0));
 String var1 = resultSet.getString("sw_mac");
-cn.setsw_mac((String)TypeTrans.getvalue("String",var1));
+cn.setsw_mac((String) TypeTrans.getvalue("String",var1));
 String var2 = resultSet.getString("max_delay");
-cn.setmax_delay((String)TypeTrans.getvalue("String",var2));
+cn.setmax_delay((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("sw_id");
-cn.setsw_id((String)TypeTrans.getvalue("String",var3));
+cn.setsw_id((String) TypeTrans.getvalue("String",var3));
 String var4 = resultSet.getString("sw_ip");
-cn.setsw_ip((String)TypeTrans.getvalue("String",var4));
+cn.setsw_ip((String) TypeTrans.getvalue("String",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,sw> SelectForsw_mac(String methodfield_) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_mac=" +methodfield_+";");
+public Map<String, sw> SelectForsw_mac(String methodfield_) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from sw where sw_mac=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
 String var0 = resultSet.getString("required_bw");
-cn.setrequired_bw((String)TypeTrans.getvalue("String",var0));
+cn.setrequired_bw((String) TypeTrans.getvalue("String",var0));
 String var1 = resultSet.getString("sw_mac");
-cn.setsw_mac((String)TypeTrans.getvalue("String",var1));
+cn.setsw_mac((String) TypeTrans.getvalue("String",var1));
 String var2 = resultSet.getString("max_delay");
-cn.setmax_delay((String)TypeTrans.getvalue("String",var2));
+cn.setmax_delay((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("sw_id");
-cn.setsw_id((String)TypeTrans.getvalue("String",var3));
+cn.setsw_id((String) TypeTrans.getvalue("String",var3));
 String var4 = resultSet.getString("sw_ip");
-cn.setsw_ip((String)TypeTrans.getvalue("String",var4));
+cn.setsw_ip((String) TypeTrans.getvalue("String",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,sw> SelectFormax_delay(String methodfield_) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where max_delay=" +methodfield_+";");
+public Map<String, sw> SelectFormax_delay(String methodfield_) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from sw where max_delay=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
 String var0 = resultSet.getString("required_bw");
-cn.setrequired_bw((String)TypeTrans.getvalue("String",var0));
+cn.setrequired_bw((String) TypeTrans.getvalue("String",var0));
 String var1 = resultSet.getString("sw_mac");
-cn.setsw_mac((String)TypeTrans.getvalue("String",var1));
+cn.setsw_mac((String) TypeTrans.getvalue("String",var1));
 String var2 = resultSet.getString("max_delay");
-cn.setmax_delay((String)TypeTrans.getvalue("String",var2));
+cn.setmax_delay((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("sw_id");
-cn.setsw_id((String)TypeTrans.getvalue("String",var3));
+cn.setsw_id((String) TypeTrans.getvalue("String",var3));
 String var4 = resultSet.getString("sw_ip");
-cn.setsw_ip((String)TypeTrans.getvalue("String",var4));
+cn.setsw_ip((String) TypeTrans.getvalue("String",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,sw> SelectForsw_id(String methodfield_) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_id=" +methodfield_+";");
+public Map<String, sw> SelectForsw_id(String methodfield_) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from sw where sw_id=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
 String var0 = resultSet.getString("required_bw");
-cn.setrequired_bw((String)TypeTrans.getvalue("String",var0));
+cn.setrequired_bw((String) TypeTrans.getvalue("String",var0));
 String var1 = resultSet.getString("sw_mac");
-cn.setsw_mac((String)TypeTrans.getvalue("String",var1));
+cn.setsw_mac((String) TypeTrans.getvalue("String",var1));
 String var2 = resultSet.getString("max_delay");
-cn.setmax_delay((String)TypeTrans.getvalue("String",var2));
+cn.setmax_delay((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("sw_id");
-cn.setsw_id((String)TypeTrans.getvalue("String",var3));
+cn.setsw_id((String) TypeTrans.getvalue("String",var3));
 String var4 = resultSet.getString("sw_ip");
-cn.setsw_ip((String)TypeTrans.getvalue("String",var4));
+cn.setsw_ip((String) TypeTrans.getvalue("String",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,sw> SelectForsw_ip(String methodfield_) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_ip=" +methodfield_+";");
+public Map<String, sw> SelectForsw_ip(String methodfield_) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from sw where sw_ip=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
 String var0 = resultSet.getString("required_bw");
-cn.setrequired_bw((String)TypeTrans.getvalue("String",var0));
+cn.setrequired_bw((String) TypeTrans.getvalue("String",var0));
 String var1 = resultSet.getString("sw_mac");
-cn.setsw_mac((String)TypeTrans.getvalue("String",var1));
+cn.setsw_mac((String) TypeTrans.getvalue("String",var1));
 String var2 = resultSet.getString("max_delay");
-cn.setmax_delay((String)TypeTrans.getvalue("String",var2));
+cn.setmax_delay((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("sw_id");
-cn.setsw_id((String)TypeTrans.getvalue("String",var3));
+cn.setsw_id((String) TypeTrans.getvalue("String",var3));
 String var4 = resultSet.getString("sw_ip");
-cn.setsw_ip((String)TypeTrans.getvalue("String",var4));
+cn.setsw_ip((String) TypeTrans.getvalue("String",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
@@ -132,8 +125,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String,sw> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
-  Map<String,sw> classmap = new HashMap<>();
+public Map<String, sw> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
+  Map<String, sw> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();
@@ -162,12 +155,12 @@ Field[] fields = cn.getClass().getFields();
 String result = "";
 for (Field field : fields) { 
 field.setAccessible(true);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
 }
 }else{
 for(String s1 : outfield) {
 Field field = cn.getClass().getField(s1);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
 }}
 classmap.put(m+"",cn);
 m++;

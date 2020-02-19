@@ -1,165 +1,158 @@
 package SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql;
-import java.sql.Timestamp;
 
- import SqlInit.AbstractSql;
-
- import java.sql.ResultSet;
-
- import java.util.Map;
-
- import java.util.HashMap;
-
- import java.util.HashMap;
-
- import java.lang.reflect.Field;
-
- import Annotation_Collection.Sql.*;
-
- import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.items;
+import Annotation_Collection.Sql.DaoSql;
+import SqlInit.AbstractSql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.items;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.TypeTrans;
 
+import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
 /*本程序框架代码由自动生成*/
-@DaoSql("items_sql")public class items_sql extends AbstractSql{
+@DaoSql("items_sql")public class items_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectForcreatetime(Timestamp methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where createtime=" +methodfield_+";");
+public Map<String, items> SelectForcreatetime(Timestamp methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where createtime=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectForprice(float methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where price=" +methodfield_+";");
+public Map<String, items> SelectForprice(float methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where price=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectForname(String methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where name=" +methodfield_+";");
+public Map<String, items> SelectForname(String methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where name=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectForid(long methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where id=" +methodfield_+";");
+public Map<String, items> SelectForid(long methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where id=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectFordetail(String methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where detail=" +methodfield_+";");
+public Map<String, items> SelectFordetail(String methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where detail=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,items> SelectForpic(String methodfield_) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from items where pic=" +methodfield_+";");
+public Map<String, items> SelectForpic(String methodfield_) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from items where pic=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 items cn = new items();
 String var0 = resultSet.getString("createtime");
-cn.setcreatetime((Timestamp)TypeTrans.getvalue("Timestamp",var0));
+cn.setcreatetime((Timestamp) TypeTrans.getvalue("Timestamp",var0));
 String var1 = resultSet.getString("price");
-cn.setprice((float)TypeTrans.getvalue("float",var1));
+cn.setprice((float) TypeTrans.getvalue("float",var1));
 String var2 = resultSet.getString("name");
-cn.setname((String)TypeTrans.getvalue("String",var2));
+cn.setname((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("id");
-cn.setid((long)TypeTrans.getvalue("long",var3));
+cn.setid((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("detail");
-cn.setdetail((String)TypeTrans.getvalue("String",var4));
+cn.setdetail((String) TypeTrans.getvalue("String",var4));
 String var5 = resultSet.getString("pic");
-cn.setpic((String)TypeTrans.getvalue("String",var5));
+cn.setpic((String) TypeTrans.getvalue("String",var5));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
@@ -167,8 +160,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String,items> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
-  Map<String,items> classmap = new HashMap<>();
+public Map<String, items> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
+  Map<String, items> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();
@@ -197,12 +190,12 @@ Field[] fields = cn.getClass().getFields();
 String result = "";
 for (Field field : fields) { 
 field.setAccessible(true);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
 }
 }else{
 for(String s1 : outfield) {
 Field field = cn.getClass().getField(s1);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
 }}
 classmap.put(m+"",cn);
 m++;

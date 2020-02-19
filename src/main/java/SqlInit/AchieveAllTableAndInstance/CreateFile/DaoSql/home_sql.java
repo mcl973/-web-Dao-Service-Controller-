@@ -1,130 +1,123 @@
 package SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql;
 
- import SqlInit.AbstractSql;
-
- import java.sql.ResultSet;
-
- import java.util.Map;
-
- import java.util.HashMap;
-
- import java.util.HashMap;
-
- import java.lang.reflect.Field;
-
- import Annotation_Collection.Sql.*;
-
- import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.home;
+import Annotation_Collection.Sql.DaoSql;
+import SqlInit.AbstractSql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.home;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.TypeTrans;
 
+import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+
 /*本程序框架代码由自动生成*/
-@DaoSql("home_sql")public class home_sql extends AbstractSql{
+@DaoSql("home_sql")public class home_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,home> SelectForhometocommunity(long methodfield_) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from home where hometocommunity=" +methodfield_+";");
+public Map<String, home> SelectForhometocommunity(long methodfield_) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from home where hometocommunity=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 home cn = new home();
 String var0 = resultSet.getString("hometocommunity");
-cn.sethometocommunity((long)TypeTrans.getvalue("long",var0));
+cn.sethometocommunity((long) TypeTrans.getvalue("long",var0));
 String var1 = resultSet.getString("hometoperson");
-cn.sethometoperson((long)TypeTrans.getvalue("long",var1));
+cn.sethometoperson((long) TypeTrans.getvalue("long",var1));
 String var2 = resultSet.getString("homename");
-cn.sethomename((String)TypeTrans.getvalue("String",var2));
+cn.sethomename((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("hmesize");
-cn.sethmesize((long)TypeTrans.getvalue("long",var3));
+cn.sethmesize((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("homeid");
-cn.sethomeid((long)TypeTrans.getvalue("long",var4));
+cn.sethomeid((long) TypeTrans.getvalue("long",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,home> SelectForhometoperson(long methodfield_) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from home where hometoperson=" +methodfield_+";");
+public Map<String, home> SelectForhometoperson(long methodfield_) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from home where hometoperson=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 home cn = new home();
 String var0 = resultSet.getString("hometocommunity");
-cn.sethometocommunity((long)TypeTrans.getvalue("long",var0));
+cn.sethometocommunity((long) TypeTrans.getvalue("long",var0));
 String var1 = resultSet.getString("hometoperson");
-cn.sethometoperson((long)TypeTrans.getvalue("long",var1));
+cn.sethometoperson((long) TypeTrans.getvalue("long",var1));
 String var2 = resultSet.getString("homename");
-cn.sethomename((String)TypeTrans.getvalue("String",var2));
+cn.sethomename((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("hmesize");
-cn.sethmesize((long)TypeTrans.getvalue("long",var3));
+cn.sethmesize((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("homeid");
-cn.sethomeid((long)TypeTrans.getvalue("long",var4));
+cn.sethomeid((long) TypeTrans.getvalue("long",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,home> SelectForhomename(String methodfield_) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from home where homename=" +methodfield_+";");
+public Map<String, home> SelectForhomename(String methodfield_) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from home where homename=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 home cn = new home();
 String var0 = resultSet.getString("hometocommunity");
-cn.sethometocommunity((long)TypeTrans.getvalue("long",var0));
+cn.sethometocommunity((long) TypeTrans.getvalue("long",var0));
 String var1 = resultSet.getString("hometoperson");
-cn.sethometoperson((long)TypeTrans.getvalue("long",var1));
+cn.sethometoperson((long) TypeTrans.getvalue("long",var1));
 String var2 = resultSet.getString("homename");
-cn.sethomename((String)TypeTrans.getvalue("String",var2));
+cn.sethomename((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("hmesize");
-cn.sethmesize((long)TypeTrans.getvalue("long",var3));
+cn.sethmesize((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("homeid");
-cn.sethomeid((long)TypeTrans.getvalue("long",var4));
+cn.sethomeid((long) TypeTrans.getvalue("long",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,home> SelectForhmesize(long methodfield_) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from home where hmesize=" +methodfield_+";");
+public Map<String, home> SelectForhmesize(long methodfield_) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from home where hmesize=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 home cn = new home();
 String var0 = resultSet.getString("hometocommunity");
-cn.sethometocommunity((long)TypeTrans.getvalue("long",var0));
+cn.sethometocommunity((long) TypeTrans.getvalue("long",var0));
 String var1 = resultSet.getString("hometoperson");
-cn.sethometoperson((long)TypeTrans.getvalue("long",var1));
+cn.sethometoperson((long) TypeTrans.getvalue("long",var1));
 String var2 = resultSet.getString("homename");
-cn.sethomename((String)TypeTrans.getvalue("String",var2));
+cn.sethomename((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("hmesize");
-cn.sethmesize((long)TypeTrans.getvalue("long",var3));
+cn.sethmesize((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("homeid");
-cn.sethomeid((long)TypeTrans.getvalue("long",var4));
+cn.sethomeid((long) TypeTrans.getvalue("long",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,home> SelectForhomeid(long methodfield_) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from home where homeid=" +methodfield_+";");
+public Map<String, home> SelectForhomeid(long methodfield_) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from home where homeid=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
 home cn = new home();
 String var0 = resultSet.getString("hometocommunity");
-cn.sethometocommunity((long)TypeTrans.getvalue("long",var0));
+cn.sethometocommunity((long) TypeTrans.getvalue("long",var0));
 String var1 = resultSet.getString("hometoperson");
-cn.sethometoperson((long)TypeTrans.getvalue("long",var1));
+cn.sethometoperson((long) TypeTrans.getvalue("long",var1));
 String var2 = resultSet.getString("homename");
-cn.sethomename((String)TypeTrans.getvalue("String",var2));
+cn.sethomename((String) TypeTrans.getvalue("String",var2));
 String var3 = resultSet.getString("hmesize");
-cn.sethmesize((long)TypeTrans.getvalue("long",var3));
+cn.sethmesize((long) TypeTrans.getvalue("long",var3));
 String var4 = resultSet.getString("homeid");
-cn.sethomeid((long)TypeTrans.getvalue("long",var4));
+cn.sethomeid((long) TypeTrans.getvalue("long",var4));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
@@ -132,8 +125,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String,home> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
-  Map<String,home> classmap = new HashMap<>();
+public Map<String, home> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
+  Map<String, home> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();
@@ -162,12 +155,12 @@ Field[] fields = cn.getClass().getFields();
 String result = "";
 for (Field field : fields) { 
 field.setAccessible(true);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
 }
 }else{
 for(String s1 : outfield) {
 Field field = cn.getClass().getField(s1);
-field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
+field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
 }}
 classmap.put(m+"",cn);
 m++;
