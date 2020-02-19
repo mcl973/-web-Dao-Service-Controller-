@@ -1,0 +1,17 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <!--配置启动的部分，是的tomcat可以调用-->
+<servlet>
+  <servlet-name>Dispatch</servlet-name>
+  <servlet-class>ScannerAndInstance.Dispatch</servlet-class>
+  <load-on-startup>0</load-on-startup>
+</servlet>
+  <servlet-mapping>
+    <servlet-name>Dispatch</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
