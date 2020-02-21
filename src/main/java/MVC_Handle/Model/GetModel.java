@@ -35,8 +35,8 @@ public class GetModel {
         //获取到req中的参数
         Object[] paragrame = getParagrames(req, resp, method);
         try {
-            Model object = (Model) method.invoke(o, paragrame);
-            return object;
+            //执行controller中对应的方法，并返回model
+            return (Model) method.invoke(o, paragrame);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -54,11 +54,14 @@ public class GetModel {
         for (int i = 0; i < parameters.length; i++) {
             Parameter parameter = parameters[i];
             String typeName = parameter.getParameterizedType().getTypeName();
+            //使用这种方式来获取属性
             if (typeName.contains("HttpServletRequest"))
                 object[i] = req;
             else if (typeName.contains("HttpServletResponse"))
                 object[i] = resp;
             else {
+                //此时在controller的具体的method中的参数前的Paragrame注解其作用了
+                //通过其value()可以获得具体的参数的名字
                 String paragrameName = getParagrameName(parameter);
                 if (paragrameName!=null)
                     object[i] = req.getParameter(paragrameName);

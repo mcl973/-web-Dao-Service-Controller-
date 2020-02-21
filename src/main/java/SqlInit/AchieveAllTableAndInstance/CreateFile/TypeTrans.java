@@ -29,6 +29,11 @@ import java.util.Vector;
  * @since 1.0.0
  */
 public class TypeTrans {
+    /*
+        类型转换
+        原本的类型如int，但是他是以字符串形式存储在map中的，
+        现在需要将其从字符串形式的int，变成真正的int类型
+     */
     public static Object getvalue(String stringvalue,String value){
         if (stringvalue.contains(".")){
             char[] chars = stringvalue.toCharArray();
@@ -57,7 +62,7 @@ public class TypeTrans {
             default:return "";
         }
     }
-
+    //处理时间类型
     public static Date strToDate(String strDate) {
           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
           ParsePosition pos = new ParsePosition(0);

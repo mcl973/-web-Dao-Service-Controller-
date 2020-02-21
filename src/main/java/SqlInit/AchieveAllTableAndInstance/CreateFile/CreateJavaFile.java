@@ -23,6 +23,10 @@ import java.util.List;
  * @since 1.0.0
  */
 public class CreateJavaFile extends AbstractGenerateFile{
+    /*
+        这个是一个dao文件
+        属性+get()+set()方法
+     */
     public String getjavaclass(String classname,Map<String,Integer> fieldmap,String dao){
         String packages = "package "+getPackage()+"."+dao+";";
         String javafile = packages;
@@ -41,6 +45,7 @@ public class CreateJavaFile extends AbstractGenerateFile{
         javafile+=javafilestart;
         //类主体部分
         for(Map.Entry<String,String> map:nameandtype.entrySet()){
+            //开始构造属性加上方法
             javafile+=getMethod(map.getKey(),map.getValue());
         }
         String javafileend = "}";

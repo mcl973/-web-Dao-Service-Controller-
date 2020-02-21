@@ -20,6 +20,7 @@ package SqlInit.AchieveAllTableAndInstance.CreateFile;
  */
 public class SqlTypeToJavaType {
     /*
+    类型匹配，从mysql到java类型的匹配
     java.lang.String	12
     java.lang.String	1
     java.lang.String	-1

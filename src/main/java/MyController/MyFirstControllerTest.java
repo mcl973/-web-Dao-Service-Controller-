@@ -46,13 +46,18 @@ public class MyFirstControllerTest {
                       @Paragrame("name") String name){
         Map<String, md> map= example.show(name);
         if (map !=null){
+
             String result = "";
             Model model = new Model();
-            for(Map.Entry<String,md> mdmap:map.entrySet()){
-                md value = mdmap.getValue();
-                model.setModel("object",value);
+            if (map.size()==0)
+                model = null;
+            else {
+                for (Map.Entry<String, md> mdmap : map.entrySet()) {
+                    md value = mdmap.getValue();
+                    model.setModel("object", value);
+                }
+                model.setUrl("index");
             }
-            model.setUrl("index");
             return model;
         }
         return null;

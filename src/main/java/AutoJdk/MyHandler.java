@@ -28,6 +28,12 @@ public class MyHandler {
     }
 
     //通过代理类和原始类的对比得出原始类中的需要被增强的函数
+    /*
+        对比的数据包括：
+            1.返回值
+            2.函数名
+            3.参数类型
+     */
     public Method getOriginMethod(Method method1){
         int k = 0;
         Class clazz = this.object.getClass();

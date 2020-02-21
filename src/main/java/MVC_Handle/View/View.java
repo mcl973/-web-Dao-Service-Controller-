@@ -72,32 +72,38 @@ public class View {
          */
     public void GetResult(){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(getView()));
-            //开始读取html文件
-            String str = bufferedReader.readLine();
-            String result=null;
-            //获取map中的key和value
-            Object object = null;
-            String objectname= null;
-            //这里仅仅是测试使用，后期还是要做改动
-            //这里只写了一个,其实原理一样只需要针对html文件去处理就好了
-            for(Map.Entry<String ,Object> map:model.getModel().entrySet()){
-                object = map.getValue();
-                objectname = map.getKey();
-                break;
-            }
-            while (str!=null){
-                //具体的修改文件
-                String temp = html.wrapetheresult(str,object,objectname);
-                if (temp!=null)
-                    result += temp;
-                str = bufferedReader.readLine();
-            }
-            if (result!=null) {
-                //去除null值
-                String aNull = result.replaceAll("null", "");
-                //将其渲染到浏览器
-                printWriter.write(aNull);
+            if (model!=null) {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(getView()));
+                //开始读取html文件
+                String str = bufferedReader.readLine();
+                String result = null;
+                //获取map中的key和value
+                Object object = null;
+                String objectname = null;
+                //这里仅仅是测试使用，后期还是要做改动
+                //这里只写了一个,其实原理一样只需要针对html文件去处理就好了
+                for (Map.Entry<String, Object> map : model.getModel().entrySet()) {
+                    object = map.getValue();
+                    objectname = map.getKey();
+                    break;
+                }
+                while (str != null) {
+                    //具体的修改文件
+                    String temp = html.wrapetheresult(str, object, objectname);
+                    if (temp != null)
+                        result += temp;
+                    str = bufferedReader.readLine();
+                }
+                if (result != null) {
+                    //去除null值
+                    String aNull = result.replaceAll("null", "");
+                    //将其渲染到浏览器
+                    printWriter.write(aNull);
+                    printWriter.flush();
+                }
+            }else {
+                //如果model为null，表示没有具体的值或是操作失败
+                printWriter.write("null");
                 printWriter.flush();
             }
         } catch (IOException e) {

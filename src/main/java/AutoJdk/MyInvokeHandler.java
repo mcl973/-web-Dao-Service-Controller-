@@ -49,6 +49,7 @@ public class MyInvokeHandler extends MyHandler implements InvocationHandler {
         return null;
     }
 
+    //此时执行的是参数的自动注入，如果传进来的值不为空，则不进行自动注入
     public Object[] changeParagrame(Method method1,Object[] args){
         //开始参数的改变
         Map<String, String> hasMethodParagrame = fef.isHasMethodParagrame(method1);
@@ -57,9 +58,10 @@ public class MyInvokeHandler extends MyHandler implements InvocationHandler {
 
         for (int i = 0; i < parameters.length; i++) {
             if (args[i]!=null){
+                //如果其类型为String则判断其值是不是为空
                 if(!((String)args[i]).equals("")){
                     paras[i] = args[i];
-                }else if (hasMethodParagrame.containsKey(parameters[i].getName()))
+                }else if (hasMethodParagrame.containsKey(parameters[i].getName()))//查看这个参数有没有注解
                     paras[i] = hasMethodParagrame.get(parameters[i].getName());
                 else paras[i] = args[i];
             }else if(hasMethodParagrame.containsKey(parameters[i].getName())){
@@ -78,10 +80,10 @@ public class MyInvokeHandler extends MyHandler implements InvocationHandler {
         BaseInterface bseInterface = getaopstate(method1);
         Object object = null;
         if (bseInterface!=null) {
-            //在这里实现参数注入，及判断args中元素的类型
+            //在这里实现了方法的aop的操作
             object = bseInterface.Excute(method, this.object, finalargs);
         }else {
-            //在这里实现参数注入，及判断args中元素的类型
+            //如果方法没有aop那就执行正常的操作
             object = method.invoke(this.object,finalargs);
         }
         return object;

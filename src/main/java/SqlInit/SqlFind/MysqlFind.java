@@ -34,6 +34,4 @@ public abstract class MysqlFind extends AbstractSqlFind {
         sqlinitmap.put(SqlInitNeedCommand.jdbc_password,sqlargs[3]);
     }
 
-
-
 }

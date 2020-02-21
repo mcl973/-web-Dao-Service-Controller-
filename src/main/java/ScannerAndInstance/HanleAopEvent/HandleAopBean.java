@@ -42,21 +42,24 @@ public class HandleAopBean extends AbstractHandleAopBean {
             String result = isHasAopAnnotation(value.getClass().getMethods());
             //这一步很重要，如果没有这一步，候命是没有办法实现自动注入的，
             //所以需要在创建动态代理之前先将数据注入进去
-            if (result!=null){
+            if (result!=null) {
                 //判断其field元素是否需要自动注入
                 Field[] declaredFields = aClass.getDeclaredFields();
                 for (Field declaredField : declaredFields) {
                     String s = isHasAutowrite(declaredField);
-                    if (s!=null){
+                    if (s != null) {
+                        //给其权限
                         declaredField.setAccessible(true);
                         try {
-                            declaredField.set(value,iocmap.get(s));
+                            //注入值
+                            declaredField.set(value, iocmap.get(s));
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
                         }
                     }
                 }
-                //得到值，实例化,使用jdk的动态代理
+                //得到值，实例化,使用jdk的动态代理，原始的object有的只，在实现动态代理后还会继续保留其值
+                //注入必须要在代理前，代理后的类不会有代理前的属性
                 MyInvokeHandler myInvokeHandler = new MyInvokeHandler(value);
                 Object newInstance = JAutoAop.createNewInstance(value, myInvokeHandler);
                 map.setValue(newInstance);

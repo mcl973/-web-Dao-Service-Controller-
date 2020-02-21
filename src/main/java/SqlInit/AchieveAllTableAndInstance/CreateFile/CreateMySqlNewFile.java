@@ -29,12 +29,16 @@ public class CreateMySqlNewFile implements Instance {
     public void instance(String classname, Map<String,Integer> fieldmap) {
         //创建java文件
         String result = new CreateJavaFile().getjavaclass(classname,fieldmap,"Dao");
+        //构造增删改查文件
         String sqlresult = new CreateJavaSqlFile().getjavaclass(classname,fieldmap,"DaoSql");
+        //获取当前的全限定名
         String path = getnewpath(getappth());
         File file = null;
         try {
+            //保存java文件
             file = createFile(path + "\\Dao\\" ,classname + ".java");
             savefile(file,result);
+            //保存增删改查文件
             file = createFile(path+"\\DaoSql\\",classname+"_sql.java");
             savefile(file,sqlresult);
         } catch (IOException e) {

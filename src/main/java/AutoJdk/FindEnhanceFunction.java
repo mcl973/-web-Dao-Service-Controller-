@@ -37,6 +37,7 @@ public class FindEnhanceFunction {
     private FindEnhanceFunction(){
 
     }
+    //单例模式
     public static FindEnhanceFunction getInstance(){
         return findEnhanceFunction;
     }
@@ -90,6 +91,7 @@ public class FindEnhanceFunction {
         return map;
     }
 
+    //这个参数是否支持自动注入，如果支持则返回其上的注解中的值，否则返回null
     public String isHasParagrameAutowrite(Parameter parameter){
         return GetJieXi.getJieXi(parameter).JiexiAnnotation(parameter);
     }
@@ -183,12 +185,13 @@ public class FindEnhanceFunction {
         Annotation exterClassAnnotation = getExterClassAnnotation(clazz);
         return getAnnotationValue(exterClassAnnotation);
     }
-
+    //快速的获取method上面的注解对应的value值
     public String getValue(Method method){
         Annotation exterFunctionAnnotation = getExterFunctionAnnotation(method);
         return getAnnotationValue(exterFunctionAnnotation);
     }
 
+    //快速的获取field上面的注解对应的value值
     public String getValue(Field field){
         Annotation exterFieldAnnotation = getExterFieldAnnotation(field);
         return getAnnotationValue(exterFieldAnnotation);

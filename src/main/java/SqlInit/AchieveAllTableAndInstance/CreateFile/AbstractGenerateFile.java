@@ -24,11 +24,13 @@ import java.util.Map;
  */
 public abstract class AbstractGenerateFile {
     abstract public String getjavaclass(String classname, Map<String,Integer> fieldmap, String dao);
+    //获取报名
     public String getPackage(){
         Package aPackage = this.getClass().getPackage();
         String packagename = aPackage.getName();
         return packagename;
     }
+    //获取sql的annotation所在的具体的位置
     public String  getSqlAnnotation(){
         Package aPackage = this.getClass().getPackage();
         String name = aPackage.getName();
@@ -44,6 +46,7 @@ public abstract class AbstractGenerateFile {
         else
             return qianzhui;
     }
+    //将fieldmap中的String形式的类型转成真正的类型
     public List<Object> getNameAndType(Map<String,Integer> fieldmap){
         Map<String,String>  nameandtype = new HashMap<>();
         String imports = "";

@@ -55,6 +55,7 @@ public class Handle_Post implements PostMethods{
 
     @Override
     public String achieveObject_key(HttpServletRequest req){
+        //获取127.0.0.1:8080/ 后面的路径
         String urlrequest = req.getRequestURI();
         String context = req.getContextPath();
         String url = urlrequest.replace(context, "");

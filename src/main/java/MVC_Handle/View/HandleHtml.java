@@ -23,9 +23,14 @@ import java.util.Vector;
  * @since 1.0.0
  */
 public class HandleHtml {
-
+    /*
+        总的来说时分为了三步走战略：
+        1.找，局部代替
+        2.分，找值代替
+        3.合
+     */
     public String wrapetheresult(String html,Object object,String objectname){
-        //读取
+        //读取，找，局部代替
         String result = HtmlToString(html);
         //如果为null，或是不包含mcl######mcl，就直接返回，表示没有数据需要填充
         if (result == null||!result.contains("mcl######mcl"))
@@ -34,10 +39,10 @@ public class HandleHtml {
         String[] split = result.split("mcl######mcl");
         Object o = null;
         if (!split[1].equals("hello")){
-            //将中间的字符串编程真正的数据
+            //将中间的字符串编程真正的数据,这个是实现了渲染的核心。 分，找值代替
             o =handlerObject(object,objectname,split[1]);
         }
-        //合并数据
+        //合并数据，合
         result = split[0]+o+split[2];
         return result;
     }
@@ -51,7 +56,7 @@ public class HandleHtml {
         String str = "";
         String result = "";
         for (char aChar : chars) {
-            //起始点
+            //起始点<<<<<<<<<<<<<<<<<<<<<<
             if (aChar=='$') {
                 i = 1;
                 continue;
@@ -60,7 +65,7 @@ public class HandleHtml {
                 if (aChar == '{')
                     continue;
                 else if (aChar == '}')
-                    //终点
+                    //终点>>>>>>>>>>>>>>>>>>>>>>>>>>
                     i= 0;
                 else {
                     result+=aChar;
@@ -68,7 +73,7 @@ public class HandleHtml {
                 continue;
             }
             if (!result.equals("")) {
-                //合并处理
+                //合并处理---------------------------------
                 result = handlerData(result);
                 str +="mcl######mcl"+result+"mcl######mcl"+aChar;//此时需要处理数据。
                 result="";

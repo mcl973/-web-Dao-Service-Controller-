@@ -21,14 +21,14 @@
                             ----->view通过url找到具体的html文件，在通过重组的方式将value注入到html中
                                         然后将html文件发送到浏览器。
   五、MyController使用户编写Controller的地方。
-      MyService使用户编写service的地方。其中MyService/AopMethod是提供aop方法，其中提供了几个例子，分别是after、before、around。用户可以自实现自己的aop方法，但是必须要实现MyService/AopMethod/下的BaseInterface方法。MyService/impl是service的接口实现了，MyService/Interface 是声明接口的地方。
-      ScannerAndInstance是整个框架的核心，它包含了扫描、实例化、aop处理、自动注入、路径映射。
-         ScannerAndInstance/Scanner是一个扫描包，用户可以自己实现scanner，但是需要继承抽象类AbstractScannerBean。
-         ScannerAndInstance/Instance是一个实例化包，用户可以实现自己的实例化方法，但是需要继承AbstraInstanceBean，其中ScannerAndInstance/Instance/GetJieXi是一个用于处理注解的类。
-         ScannerAndInstance/HandAopEvent是一个处理aop的包，用户可以自实现，但是需要继承AbstractHandleAopBean。
-         ScannerAndInstance/HandleAutowriteEvent是一个处理自动注入的包，用户可以自实现，但是需要继承AbstractHandleAutowrite。
-          ScannerAndInstance/HandleRouteMappEvent是一个处理Controller层路径映射，用户可以自实现，但是需要继承AbstractHandleRoutemapping。
-  六、SqlInit，是用来初始化数据库的。
+  六、MyService使用户编写service的地方。其中MyService/AopMethod是提供aop方法，其中提供了几个例子，分别是after、before、around。用户可以自实现自己的aop方法，但是必须要实现MyService/AopMethod/下的BaseInterface方法。MyService/impl是service的接口实现了，MyService/Interface 是声明接口的地方。
+  七、ScannerAndInstance是整个框架的核心，它包含了扫描、实例化、aop处理、自动注入、路径映射。
+     ScannerAndInstance/Scanner是一个扫描包，用户可以自己实现scanner，但是需要继承抽象类AbstractScannerBean。
+     ScannerAndInstance/Instance是一个实例化包，用户可以实现自己的实例化方法，但是需要继承AbstraInstanceBean，其中ScannerAndInstance/Instance/GetJieXi是一个用于处理注解的类。
+     ScannerAndInstance/HandAopEvent是一个处理aop的包，用户可以自实现，但是需要继承AbstractHandleAopBean。
+     ScannerAndInstance/HandleAutowriteEvent是一个处理自动注入的包，用户可以自实现，但是需要继承AbstractHandleAutowrite。
+      ScannerAndInstance/HandleRouteMappEvent是一个处理Controller层路径映射，用户可以自实现，但是需要继承AbstractHandleRoutemapping。
+  八、SqlInit，是用来初始化数据库的。
       其中自动生成的Dao、DapSql在SqlInit/AchieveAllTableAndInstance/CreateFile/Dao、SqlInit/AchieveAllTableAndInstance/CreateFile/DaoSql
       自动生成代码可以这样：
         MySqlParagrame mySqlParagrame = new MySqlParagrame();
@@ -41,7 +41,8 @@
         }
       这样就可以创建Dao和DaoSql了。
 
-  七、关于tomcat的配置，由于我是使用idea的社区版配置的tomcat，所以我会按照我的来，对于专业版的idea配置tomcat就跟简单了。
+  九、关于tomcat的配置
+      由于我是使用idea的社区版配置的tomcat，所以我会按照我的来，对于专业版的idea配置tomcat就跟简单了。
       第一步  点击Run/Debug Configuration
       第二步  点击左上角的加号，选择maven
       第三步  创建好后，点击创建好的maven，将右边的name改为tomcat7，command line 改为tomcat7:run。
@@ -77,7 +78,7 @@
               <artifactId>mysql-connector-java</artifactId>
               <version>5.1.26</version>
               </dependency>
-       第七步  在web.xml中添加以下代码：
+      第七步  在web.xml中添加以下代码：
               <servlet>
               <servlet-name>Dispatch</servlet-name>
               <servlet-class>ScannerAndInstance.Dispatch</servlet-class>

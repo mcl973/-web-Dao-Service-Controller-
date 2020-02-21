@@ -40,12 +40,15 @@ public class Dispatch extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        //处理post事件
         Handle_Post handle_post = new Handle_Post(req, resp);
         handle_post.handle();
 
     }
 
+    /*
+        初始化--》 数据库连接、扫描、实例化、aop操作、自动注入、路径映射
+     */
     @Override
     public void init() throws ServletException {
         //获取sql的参数

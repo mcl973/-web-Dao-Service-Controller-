@@ -37,10 +37,12 @@ public class HandleRouteMapping extends AbstractHandleRoutemapping {
             Object value = map.getValue();
             Class<?> aClass = value.getClass();
             JieXiRouteMapping jieXiRouteMapping = new JieXiRouteMapping();
+            //先获取类上的路径
             String s = jieXiRouteMapping.JiexiAnnotation(aClass);
             if(s!=null){
                 Method[] declaredMethods = aClass.getDeclaredMethods();
                 for (Method declaredMethod : declaredMethods) {
+                    //再获取类上的路径
                     String s1 = jieXiRouteMapping.JiexiAnnotation(declaredMethod);
                         if (s1!=null){
                         method_Object.put(s+s1,declaredMethod);

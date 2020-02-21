@@ -24,7 +24,9 @@ import java.net.URL;
  */
 public class Scanner extends AbstractScannerBean{
 
+    //扫描整个项目，将所有的文件都拉取到filesname列表中
     public void ScannerClassFile(String path){
+        //获得路径的url
         URL resource = this.getClass().getClassLoader().getResource(path.replaceAll("\\.", "/"));
         if (resource==null)
             return;
@@ -36,6 +38,7 @@ public class Scanner extends AbstractScannerBean{
                 for (String s : filenames) {
                     File file1 = new File(filename +"\\"+ s);
                     if (file1.isDirectory()) {
+                        //递归查询
                         if (path.equals(""))
                             ScannerClassFile(s);
                         else

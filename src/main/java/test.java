@@ -74,8 +74,11 @@ public class test  {
         new MySqlInit(mySqlParagrame.getSqlparam());
             AchieveAllTable achieveAllTable = new AchieveAllTable();
             Map<String, Table> tableField = achieveAllTable.getTableField(achieveAllTable.getTable());
+            //开始构造dao、daosql文件
             CreateMySqlNewFile createMySqlNewFile = new CreateMySqlNewFile();
+            //遍历Table容器
             for(Map.Entry<String,Table> map:tableField.entrySet()){
+                //为每一张表建立dao、daosql文件
                 createMySqlNewFile.instance(map.getValue().getTablename(),map.getValue().getMap());
             }
 
