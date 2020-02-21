@@ -1,13 +1,13 @@
 /**
  * Copyright (C), 2015-2020, XXX有限公司
- * FileName: AfterAop
+ * FileName: BeforeAop
  * Author:   Administrator
- * Date:     2020/02/19 10:10
+ * Date:     2020/02/21 14:55
  * Description:
  * History:
  * <author>          <time>          <version>          <desc>
  */
-package MyService.AopMethods.After;
+package MyService.AopMethods.Before;
 
 import MyService.AopMethods.BaseInterface;
 
@@ -19,23 +19,22 @@ import java.lang.reflect.Method;
  * 〈〉
  *
  * @author Administrator
- * @create 2020/02/19
+ * @create 2020/02/21
  * @since 1.0.0
  */
-public class AfterAop implements BaseInterface {
-
+public class BeforeAop implements BaseInterface {
     @Override
     public Object Excute(Method method, Object object, Object[] objects) {
+        Object object1 = null;
         try {
-            Object invoke = method.invoke(object, objects);
-            after();
-            return invoke;
+            before();
+            object1 = method.invoke(object,objects);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        return null;
+        return object1;
     }
-    private void after(){
-        System.out.println("thisis after test...");
+    public void  before(){
+        System.out.println("this is before");
     }
 }

@@ -27,6 +27,8 @@ public class InstanceBean extends AbstractInstanceBean {
     public void instanceBean() {
         //开始实例化,当前只是实例化class上面的带有注释的类
         for (String s : filesname) {
+            if (!s.contains(".class"))
+                continue;
             String news = s.replace(".class","");
             try {
                 Class<?> cl = Class.forName(news);

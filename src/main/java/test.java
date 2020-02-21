@@ -18,13 +18,21 @@ import ScannerAndInstance.Instance.InstanceBean;
 import ScannerAndInstance.Scanner.Scanner;
 import SqlInit.AchieveAllTableAndInstance.AchieveAllTable;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.CreateMySqlNewFile;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
 import SqlInit.AchieveAllTableAndInstance.Table;
 import SqlInit.SqlFind.MySqlInit;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.Buffer;
 import java.util.Map;
+import java.util.Vector;
 
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.community;
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
@@ -146,6 +154,70 @@ public class test  {
 //            System.out.println("///////////");
 //        else if (test1Class.isAnnotationPresent(RouteMapping.class))
 //            System.out.println("...........");
+//        Object object = new md();
+//        Class<?> aClass = object.getClass();
+//        String name = getLastNam(aClass.getName().toString());
+//        System.out.println(name);
+//        Field[] declaredFields = aClass.getDeclaredFields();
+//        for (Field declaredField : declaredFields) {
+//            System.out.println(declaredField.getName());
+//        }
+        Object object = "hello";
+        String name = "kkkkk"+object;
+        System.out.println(name);
+    }
+
+    public static String getLastNam(String name){
+        char[] chars = name.toCharArray();
+        String result = "";
+        Vector<String> vector = new Vector<>();
+        for (char aChar : chars) {
+            if (aChar == '.'){
+                vector.add(result);
+                result = "";
+            }
+            else {
+                result+=aChar;
+            }
+        }
+        if (vector.size()!=0)
+            return vector.lastElement();
+        else return null;
+    }
+
+    public static String handlerhtml(String html,Object object){
+        char[] chars = html.toCharArray();
+        int i = 0;
+        String str = "";
+        String result = "";
+        for (char aChar : chars) {
+            if (aChar=='$') {
+                i = 1;
+                continue;
+            }
+            if (i==1) {
+                if (aChar == '{')
+                    continue;
+                else if (aChar == '}')
+                    i= 0;
+                else {
+                    result+=aChar;
+                }
+                continue;
+            }
+            if (!result.equals("")) {
+                str +="\"+"+result+"+\"";
+                result="";
+            }
+            if (aChar == '"')
+                str+="\\\"";
+            else
+                str+=aChar;
+
+        }
+        if (!str.equals(""))
+            return str;
+        return null;
     }
 
 //    public static String getValueMethodreturn(Object o, Method method){

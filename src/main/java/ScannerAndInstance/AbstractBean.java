@@ -26,4 +26,7 @@ public abstract class AbstractBean {
     //用来存放filename的地方
     public static List<String> filesname = new ArrayList<>();
 
+    public static Object getiocmap_Value(String key){
+        return iocmap.getOrDefault(key, null);
+    }
 }

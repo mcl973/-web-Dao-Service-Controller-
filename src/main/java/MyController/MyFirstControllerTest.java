@@ -13,6 +13,7 @@ import Annotation_Collection.JAutowrite.Autowrite;
 import Annotation_Collection.JController.Controller;
 import Annotation_Collection.JParagrame.Paragrame;
 import Annotation_Collection.RouteMap.RouteMapping;
+import MVC_Handle.Model.Model;
 import MyService.Interface.example;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
 
@@ -35,24 +36,25 @@ public class MyFirstControllerTest {
 
     @Autowrite("exampleimpl")
     public example example;
-
+    /*
+        针对于Springmvc应该是使用了HttpServletResponse的重定向
+        然后使用HttpServletResponse的信息填充将数据填充进去
+     */
     @RouteMapping("/test")
-    public void  test(HttpServletResponse httpServletResponse,
+    public Model   test(HttpServletResponse httpServletResponse,
                       HttpServletRequest httpServletRequest,
                       @Paragrame("name") String name){
         Map<String, md> map= example.show(name);
         if (map !=null){
             String result = "";
+            Model model = new Model();
             for(Map.Entry<String,md> mdmap:map.entrySet()){
                 md value = mdmap.getValue();
-                result+="{"+name+":{id:"+value.getid()+"},{name:"+value.getname()+"},{age:"+value.getage()+"}}";
+                model.setModel("object",value);
             }
-            try {
-                PrintWriter writer = httpServletResponse.getWriter();
-                writer.write(result);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            model.setUrl("index");
+            return model;
         }
+        return null;
     }
 }

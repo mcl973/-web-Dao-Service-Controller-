@@ -29,6 +29,7 @@ public abstract class AbstractSqlFind extends AbstractSql {
         //得到具体的数据库连接
         this.getConnect();
         //处理完后将数据清空
+        sqlinitmap = null;
     }
     public abstract void getConnect();
     public abstract void init(String[] sqlargs);
