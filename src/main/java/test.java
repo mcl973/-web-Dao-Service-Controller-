@@ -8,6 +8,7 @@
  * <author>          <time>          <version>          <desc>
  */
 
+import AllConfigure.Sql.MySqlParagrame;
 import Annotation_Collection.RouteMap.RouteMapping;
 import Annotation_Collection.Sql.Dao;
 import ScannerAndInstance.Dispatch;
@@ -69,9 +70,8 @@ public class test  {
         return result;
     }
     public static void main(String[] args) throws Exception {
-        String[] sqlparam = {"com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mao",
-        "root","root"};
-        new MySqlInit(sqlparam);
+        MySqlParagrame mySqlParagrame = new MySqlParagrame();
+        new MySqlInit(mySqlParagrame.getSqlparam());
             AchieveAllTable achieveAllTable = new AchieveAllTable();
             Map<String, Table> tableField = achieveAllTable.getTableField(achieveAllTable.getTable());
             CreateMySqlNewFile createMySqlNewFile = new CreateMySqlNewFile();
