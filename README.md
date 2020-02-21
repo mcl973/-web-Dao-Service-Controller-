@@ -21,7 +21,7 @@
                              |
                              ----->view通过url找到具体的html文件，在通过重组的方式将value注入到html中
                                              然后将html文件发送到浏览器。
-     五、 MyController使用户编写Controller的地方。
+    五、 MyController使用户编写Controller的地方。
     六、MyService使用户编写service的地方。其中MyService/AopMethod是提供aop方法，其中提供了几个例子，分别是after、before、around。用户可以自实现自  己的aop方法，但是必须要实现MyService/AopMethod/下的BaseInterface方法。MyService/impl是service的接口实现了，MyService/Interface 是声明接口的地方。
     七、ScannerAndInstance是整个框架的核心，它包含了扫描、实例化、aop处理、自动注入、路径映射。
          ScannerAndInstance/Scanner是一个扫描包，用户可以自己实现scanner，但是需要继承抽象类AbstractScannerBean。
