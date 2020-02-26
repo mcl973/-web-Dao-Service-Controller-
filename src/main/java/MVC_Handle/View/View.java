@@ -194,7 +194,9 @@ public class View {
             return true;
         else return false;
     }
-
+    /*
+        将数据提供给request
+     */
     public void exposetoRequest(Map<String, Object[]> model,HttpServletRequest req){
         for(Map.Entry<String,Object[]> map:model.entrySet()){
             if (map.getValue()!=null){

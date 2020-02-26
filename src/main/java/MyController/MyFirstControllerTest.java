@@ -45,20 +45,21 @@ public class MyFirstControllerTest {
         然后使用HttpServletResponse的信息填充将数据填充进去
      */
     @RouteMapping("/test")
-    public Model   test(HttpServletResponse httpServletResponse,
+    public Models   test(HttpServletResponse httpServletResponse,
                       HttpServletRequest httpServletRequest,
                       @Paragrame("name") String name){
         Map<String, md> map= example.show(name);
         if (map !=null){
 
             String result = "";
-            Model model = new Model();
+            Models model = new Models();
             if (map.size()==0)
                 model = null;
             else {
                 for (Map.Entry<String, md> mdmap : map.entrySet()) {
                     md value = mdmap.getValue();
-                    model.setModel("object", value);
+                    Object[] objects = {value};
+                    model.setModel("mds", objects);
                 }
                 model.setUrl("index");
             }

@@ -18,7 +18,7 @@ package AllConfigure.HtmlBasePath;
  * @since 1.0.0
  */
 public interface HtmlBasePath {
-    //配置url的前缀
+    //配置url的前缀，废弃
     String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\JSP\\";
     //配置url的后缀名
     String HouZhuiMing = ".jsp";

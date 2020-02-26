@@ -50,7 +50,9 @@ public class Models implements HtmlBasePath {
     }
 
     public void setUrl(String url) {
+        //废弃
         this.url = BaseUrlPath+url+HouZhuiMing;
+        //在用
         setRedircturl(url);
     }
 
