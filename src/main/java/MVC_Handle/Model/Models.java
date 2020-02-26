@@ -1,8 +1,8 @@
 /**
  * Copyright (C), 2015-2020, XXX有限公司
- * FileName: Model
+ * FileName: Models
  * Author:   Administrator
- * Date:     2020/02/21 9:54
+ * Date:     2020/02/26 16:04
  * Description:
  * History:
  * <author>          <time>          <version>          <desc>
@@ -20,22 +20,22 @@ import java.util.Set;
  * 〈〉
  *
  * @author Administrator
- * @create 2020/02/21
+ * @create 2020/02/26
  * @since 1.0.0
  */
-public class Model implements HtmlBasePath {
-    Map<String,Object> model = new HashMap<>();
+public class Models implements HtmlBasePath {
+    Map<String,Object[]> model = new HashMap<>();
     String url;
     //废弃
     String redircturl ;
     public boolean isModelNull(){
         return model.size() ==0;
     }
-    public void setModel(String name,Object object){
+    public void setModel(String name,Object[] object){
         model.put(name,object);
     }
 
-    public Map<String,Object> getModel(){
+    public Map<String,Object[]> getModel(){
         return model;
     }
     public Object getModelValue(String name){
@@ -53,11 +53,11 @@ public class Model implements HtmlBasePath {
         this.url = BaseUrlPath+url+HouZhuiMing;
         setRedircturl(url);
     }
-    //废弃
+
     public String getRedircturl() {
         return HttpPath+redircturl+HouZhuiMing;
     }
-    //废弃
+
     public void setRedircturl(String redircturl) {
         this.redircturl = redircturl;
     }

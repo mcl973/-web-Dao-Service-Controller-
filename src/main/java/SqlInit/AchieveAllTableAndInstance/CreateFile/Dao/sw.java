@@ -1,4 +1,8 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import Annotation_Collection.Sql.*;@Dao("sw")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+@Dao("sw")
 public class sw{public String required_bw;
 public String getrequired_bw(){
 return required_bw;}

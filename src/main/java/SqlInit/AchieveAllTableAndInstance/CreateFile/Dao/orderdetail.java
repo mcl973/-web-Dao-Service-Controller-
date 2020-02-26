@@ -1,4 +1,8 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import Annotation_Collection.Sql.*;@Dao("orderdetail")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+@Dao("orderdetail")
 public class orderdetail{public long orders_id;
 public long getorders_id(){
 return orders_id;}

@@ -11,6 +11,7 @@ package MVC_Handle.HandleSevlet.HandlePost;
 
 import MVC_Handle.Model.GetModel;
 import MVC_Handle.Model.Model;
+import MVC_Handle.Model.Models;
 import MVC_Handle.View.View;
 import ScannerAndInstance.AbstractBean;
 
@@ -29,6 +30,7 @@ import java.io.IOException;
 public class Handle_Post implements PostMethods{
     private HttpServletRequest req;
     private HttpServletResponse resp;
+
     public Handle_Post(HttpServletRequest req, HttpServletResponse resp){
         this.req=req;
         this.resp = resp;
@@ -40,17 +42,29 @@ public class Handle_Post implements PostMethods{
         if (AbstractBean.getiocmap_Value(url)==null)
             return;
         //通过url获取到具体的method方法。
-        Model object = new GetModel().getmodel(url,req,resp);
-        View view = null;
-        try {
-            //获取view
-            view = new View(object,resp.getWriter());
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        Models object = new GetModel().getmodel(url,req,resp);
+        if (object != null) {
+            if (!object.isModelNull()) {
+                View view = null;
+                    //获取view
+                view = new View(object);
+                //开始渲染
+                view.GetResult(req,resp);
+            } else {
+                try {
+                    resp.sendRedirect(object.getRedircturl());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            try {
+                resp.getWriter().write("null");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        assert view != null;
-        //开始渲染
-        view.GetResult();
     }
 
     @Override

@@ -1,5 +1,10 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import java.sql.Timestamp;
-import Annotation_Collection.Sql.*;@Dao("orders")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+import java.sql.Timestamp;
+
+@Dao("orders")
 public class orders{public String number;
 public String getnumber(){
 return number;}

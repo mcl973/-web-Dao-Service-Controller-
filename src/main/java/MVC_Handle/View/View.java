@@ -10,9 +10,16 @@
 package MVC_Handle.View;
 
 import MVC_Handle.Model.Model;
+import MVC_Handle.Model.Models;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Vector;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -23,18 +30,25 @@ import java.util.Map;
  * @since 1.0.0
  */
 public class View {
-    private Model model ;
+    private Models model ;
+    @Deprecated
     private PrintWriter printWriter;
     private HandleHtml html = new HandleHtml();
-    public View(Model model,PrintWriter printWriter){
+    public View(Models model){
+        this.model=model;
+    }
+    @Deprecated
+    public View(Models model,PrintWriter printWriter){
         this.model=model;
         this.printWriter = printWriter;
     }
+    @Deprecated
     public File getView(){
         File view = new File(model.getUrl());
         return view;
     }
     /*
+       废弃，这个太麻烦了。。。。。。。。
             我有点明白了，springmvc是如何工作的了，虽然还没有看到源码，但是我好像已经知道了
             1、获取数据，就是在controller里需要做到的事情
             2、在modelandview里写到了网页的名字，在xml文件中写了具体的前缀，合二为一就是文件的完整路径。
@@ -70,6 +84,8 @@ public class View {
                         writer.close();
                   }
          */
+    //废弃
+    @Deprecated
     public void GetResult(){
         try {
             if (model!=null) {
@@ -78,18 +94,18 @@ public class View {
                 String str = bufferedReader.readLine();
                 String result = null;
                 //获取map中的key和value
-                Object object = null;
+                Object[] object = null;
                 String objectname = null;
                 //这里仅仅是测试使用，后期还是要做改动
                 //这里只写了一个,其实原理一样只需要针对html文件去处理就好了
-                for (Map.Entry<String, Object> map : model.getModel().entrySet()) {
+                for (Map.Entry<String, Object[]> map : model.getModel().entrySet()) {
                     object = map.getValue();
                     objectname = map.getKey();
                     break;
                 }
                 while (str != null) {
                     //具体的修改文件
-                    String temp = html.wrapetheresult(str, object, objectname);
+                    String temp = html.wrapetheresult(str, object[0], objectname);
                     if (temp != null)
                         result += temp;
                     str = bufferedReader.readLine();
@@ -110,6 +126,85 @@ public class View {
             e.printStackTrace();
         }finally {
             printWriter.close();
+        }
+    }
+
+    public void GetResult(HttpServletRequest req, HttpServletResponse resp){
+        Map<String, Object[]> model = this.model.getModel();
+        //将数据放在request中，通过dispatcher的方式跳转到某个页面，此时那个页面通过request就可以
+        //那渠道相应的数据了
+        exposetoRequest(model,req);
+        //这是一个ApplicationDispatcher实例
+        RequestDispatcher dispatcher = req.getRequestDispatcher(this.model.getRedircturl());
+//        changeDispatcher_URI_ServletPath(dispatcher.getClass(),dispatcher);
+        if (dispatcher != null) {
+            try {
+                dispatcher.forward(req,resp);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //废弃
+    @Deprecated
+    public void changeDispatcher_URI_ServletPath(Class clazz,RequestDispatcher requestDispatcher){
+        try {
+            Field requestURI = clazz.getDeclaredField("requestURI");
+            requestURI.setAccessible(true);
+            Field servletPath = clazz.getDeclaredField("servletPath");
+            servletPath.setAccessible(true);
+            String requesturl = (String)requestURI.get(requestDispatcher);
+            if (!isLink(requesturl)){
+                String[] split = requesturl.split("/");
+                String s = WrapLink(split);
+                if (!s.equals(""))
+                    requestURI.set(requestDispatcher,s);
+            }
+            String servletpath = (String)servletPath.get(requestDispatcher);
+            if (!isLink(servletpath)){
+                String[] split = servletpath.split("/");
+                String s = WrapLink(split);
+                if (!s.equals(""))
+                    servletPath.set(requestDispatcher,s);
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String WrapLink(String[] links){
+        String result = "";
+        int StartToWrap = 0;
+        for(int i=0;i<links.length-1;i++) {
+            if (links[i].equals("JSP")){
+                StartToWrap = 1;
+            }
+            if (StartToWrap == 1) {
+                result += links[i] + "/";
+            }
+        }
+        result+=links[links.length-1];
+        return result;
+    }
+
+    public boolean isLink(String weblink){
+        String[] split = weblink.split("/");
+        if (split[0].equals("http:"))
+            return true;
+        else return false;
+    }
+
+    public void exposetoRequest(Map<String, Object[]> model,HttpServletRequest req){
+        for(Map.Entry<String,Object[]> map:model.entrySet()){
+            if (map.getValue()!=null){
+                Vector<Object> object = new Vector<>();
+                Object[] value = map.getValue();
+                for (Object o : value) {
+                    object.add(o);
+                }
+                req.setAttribute(map.getKey(),object);
+            }
         }
     }
 }

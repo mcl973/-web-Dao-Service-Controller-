@@ -14,8 +14,12 @@ import Annotation_Collection.JController.Controller;
 import Annotation_Collection.JParagrame.Paragrame;
 import Annotation_Collection.RouteMap.RouteMapping;
 import MVC_Handle.Model.Model;
+import MVC_Handle.Model.Models;
 import MyService.Interface.example;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,5 +65,29 @@ public class MyFirstControllerTest {
             return model;
         }
         return null;
+    }
+    @RouteMapping("/login")
+    public Models   login(){
+        Models model = new Models();
+        model.setUrl("login");
+        return model;
+    }
+    @RouteMapping("/logining")
+    public Models   logining(HttpServletResponse httpServletResponse,
+                        HttpServletRequest httpServletRequest,
+                        @Paragrame("name") String name){
+        Models model = new Models();
+        model.setUrl("DataShow");
+        Map<String, users> login = example.login(name);
+        Map<String, mycontext> allContext = example.getAllContext(name);
+        mycontext[] mycontexts = new mycontext[allContext.size()];
+        int index = 0;
+        for(Map.Entry<String,mycontext> map:allContext.entrySet())
+            mycontexts[index++] = map.getValue();
+
+        model.setModel("object",mycontexts);
+        if (login.size()>0)
+            return model;
+        else return null;
     }
 }

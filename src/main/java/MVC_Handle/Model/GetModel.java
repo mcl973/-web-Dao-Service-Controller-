@@ -28,7 +28,7 @@ import java.lang.reflect.Parameter;
  */
 public class GetModel {
 
-    public Model getmodel(String url,HttpServletRequest req, HttpServletResponse resp) {
+    public Models getmodel(String url,HttpServletRequest req, HttpServletResponse resp) {
         Method method = (Method) AbstractBean.getiocmap_Value(url);
         //通过方法的hashcode获取到具体的类。
         Object o = AbstractBean.getiocmap_Value((String) AbstractBean.getiocmap_Value(method.hashCode() + ""));
@@ -36,7 +36,7 @@ public class GetModel {
         Object[] paragrame = getParagrames(req, resp, method);
         try {
             //执行controller中对应的方法，并返回model
-            return (Model) method.invoke(o, paragrame);
+            return (Models) method.invoke(o, paragrame);
         }catch (Exception e){
             e.printStackTrace();
         }

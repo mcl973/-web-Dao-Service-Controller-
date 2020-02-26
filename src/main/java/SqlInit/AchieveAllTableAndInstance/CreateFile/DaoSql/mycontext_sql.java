@@ -2,7 +2,7 @@ package SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql;
 
 import Annotation_Collection.Sql.DaoSql;
 import SqlInit.AbstractSql;
-import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.movecount;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.TypeTrans;
 
 import java.lang.reflect.Field;
@@ -11,57 +11,83 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*本程序框架代码由自动生成*/
-@DaoSql("movecount_sql")public class movecount_sql extends AbstractSql {
+@DaoSql("mycontext_sql")public class mycontext_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,movecount> SelectFormoney(long methodfield_) throws Exception{
-  Map<String,movecount> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from movecount where money=\"" +methodfield_+"\";");
+public Map<String,mycontext> SelectFordata(String methodfield_) throws Exception{
+  Map<String,mycontext> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from mycontext where data=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
-movecount cn = new movecount();
-String var0 = resultSet.getString("money");
-cn.setmoney((long) TypeTrans.getvalue("long",var0));
-String var1 = resultSet.getString("id");
-cn.setid((long) TypeTrans.getvalue("long",var1));
-String var2 = resultSet.getString("username");
-cn.setusername((String) TypeTrans.getvalue("String",var2));
+mycontext cn = new mycontext();
+String var0 = resultSet.getString("data");
+cn.setdata((String) TypeTrans.getvalue("String",var0));
+String var1 = resultSet.getString("context");
+cn.setcontext((String) TypeTrans.getvalue("String",var1));
+String var2 = resultSet.getString("count");
+cn.setcount((long) TypeTrans.getvalue("long",var2));
+String var3 = resultSet.getString("username");
+cn.setusername((String) TypeTrans.getvalue("String",var3));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,movecount> SelectForid(long methodfield_) throws Exception{
-  Map<String,movecount> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from movecount where id=\"" +methodfield_+"\";");
+public Map<String,mycontext> SelectForcontext(String methodfield_) throws Exception{
+  Map<String,mycontext> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from mycontext where context=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
-movecount cn = new movecount();
-String var0 = resultSet.getString("money");
-cn.setmoney((long) TypeTrans.getvalue("long",var0));
-String var1 = resultSet.getString("id");
-cn.setid((long) TypeTrans.getvalue("long",var1));
-String var2 = resultSet.getString("username");
-cn.setusername((String) TypeTrans.getvalue("String",var2));
+mycontext cn = new mycontext();
+String var0 = resultSet.getString("data");
+cn.setdata((String) TypeTrans.getvalue("String",var0));
+String var1 = resultSet.getString("context");
+cn.setcontext((String) TypeTrans.getvalue("String",var1));
+String var2 = resultSet.getString("count");
+cn.setcount((long) TypeTrans.getvalue("long",var2));
+String var3 = resultSet.getString("username");
+cn.setusername((String) TypeTrans.getvalue("String",var3));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String,movecount> SelectForusername(String methodfield_) throws Exception{
-  Map<String,movecount> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from movecount where username=\"" +methodfield_+"\";");
+public Map<String,mycontext> SelectForcount(long methodfield_) throws Exception{
+  Map<String,mycontext> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from mycontext where count=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
-movecount cn = new movecount();
-String var0 = resultSet.getString("money");
-cn.setmoney((long) TypeTrans.getvalue("long",var0));
-String var1 = resultSet.getString("id");
-cn.setid((long) TypeTrans.getvalue("long",var1));
-String var2 = resultSet.getString("username");
-cn.setusername((String) TypeTrans.getvalue("String",var2));
+mycontext cn = new mycontext();
+String var0 = resultSet.getString("data");
+cn.setdata((String) TypeTrans.getvalue("String",var0));
+String var1 = resultSet.getString("context");
+cn.setcontext((String) TypeTrans.getvalue("String",var1));
+String var2 = resultSet.getString("count");
+cn.setcount((long) TypeTrans.getvalue("long",var2));
+String var3 = resultSet.getString("username");
+cn.setusername((String) TypeTrans.getvalue("String",var3));
+classmap.put(m+"",cn);
+m++;
+}return classmap;
+}
+/*单个查询，输出匹配的所有的值，只能单个匹配
+ 参数为需要匹配的值，只传入值*/
+public Map<String,mycontext> SelectForusername(String methodfield_) throws Exception{
+  Map<String,mycontext> classmap = new HashMap<>();
+  ResultSet resultSet = statement.executeQuery("select * from mycontext where username=\"" +methodfield_+"\";");
+  int m = 0;
+  while(resultSet.next()){
+mycontext cn = new mycontext();
+String var0 = resultSet.getString("data");
+cn.setdata((String) TypeTrans.getvalue("String",var0));
+String var1 = resultSet.getString("context");
+cn.setcontext((String) TypeTrans.getvalue("String",var1));
+String var2 = resultSet.getString("count");
+cn.setcount((long) TypeTrans.getvalue("long",var2));
+String var3 = resultSet.getString("username");
+cn.setusername((String) TypeTrans.getvalue("String",var3));
 classmap.put(m+"",cn);
 m++;
 }return classmap;
@@ -69,8 +95,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String,movecount> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
-  Map<String,movecount> classmap = new HashMap<>();
+public Map<String,mycontext> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
+  Map<String,mycontext> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();
@@ -89,10 +115,10 @@ if(tempk==0){
 out+=s;
 }else{
 out+=","+s;
-} tempk++;}}  ResultSet resultSet = statement.executeQuery("select "+out+" from movecount where "+select+";");
+} tempk++;}}  ResultSet resultSet = statement.executeQuery("select "+out+" from mycontext where "+select+";");
   int m = 0;
   while(resultSet.next()){
-movecount cn = new movecount();
+mycontext cn = new mycontext();
 if(outfield == null){
 
 Field[] fields = cn.getClass().getFields(); 
@@ -139,7 +165,7 @@ String sets = "";
  k++; 
  }
  k = 0;
-String sql = "update movecount  set "+sets+" where "+wheres+";";
+String sql = "update mycontext  set "+sets+" where "+wheres+";";
  
  if (!statement.execute(sql)) {
  return true;
@@ -161,7 +187,7 @@ public boolean deleteformore(Map<String,Object> mapdelete)throws Exception{
  else
 deletes+=" , "+map.getKey()+"=\""+map.getValue()+"\"";
   }
- String sql = "delete from movecount where "+deletes+";";
+ String sql = "delete from mycontext where "+deletes+";";
  if (!statement.execute(sql)) {
  return true;
    }
@@ -169,7 +195,7 @@ deletes+=" , "+map.getKey()+"=\""+map.getValue()+"\"";
  return false;
  }
 /*这个是单个处理插入的程序,需要传入的参数是一个关于这个跟表的对象*/
-public boolean insertmethod(movecount object)throws Exception{
+public boolean insertmethod(mycontext object)throws Exception{
  
  String insertbefore = "";
  String insertafter = "";
@@ -185,7 +211,7 @@ insertafter += "\""+field.get(object)+"\"";
  }
  k++;
    }
- String sql = "insert into movecount("+insertbefore+") values("+insertafter+");";
+ String sql = "insert into mycontext("+insertbefore+") values("+insertafter+");";
  if (!statement.execute(sql)) {
  return true;
    }

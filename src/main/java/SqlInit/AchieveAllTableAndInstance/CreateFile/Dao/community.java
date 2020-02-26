@@ -1,4 +1,8 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import Annotation_Collection.Sql.*;@Dao("community")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+@Dao("community")
 public class community{public long communitytohome;
 public long getcommunitytohome(){
 return communitytohome;}

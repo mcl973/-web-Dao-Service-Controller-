@@ -15,8 +15,8 @@ import java.util.Map;
 @DaoSql("items_sql")public class items_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectForcreatetime(Timestamp methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForcreatetime(Timestamp methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where createtime=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -39,8 +39,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectForprice(float methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForprice(float methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where price=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -63,8 +63,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectForname(String methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForname(String methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where name=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -87,8 +87,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectForid(long methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForid(long methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where id=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -111,8 +111,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectFordetail(String methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectFordetail(String methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where detail=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -135,8 +135,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, items> SelectForpic(String methodfield_) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForpic(String methodfield_) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from items where pic=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -160,8 +160,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String, items> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
-  Map<String, items> classmap = new HashMap<>();
+public Map<String,items> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
+  Map<String,items> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();

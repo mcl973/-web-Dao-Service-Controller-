@@ -15,8 +15,8 @@ import java.util.Map;
 @DaoSql("user_sql")public class user_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, user> SelectForbirthday(Date methodfield_) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForbirthday(Date methodfield_) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from user where birthday=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -37,8 +37,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, user> SelectForaddress(String methodfield_) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForaddress(String methodfield_) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from user where address=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -59,8 +59,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, user> SelectForsex(String methodfield_) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForsex(String methodfield_) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from user where sex=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -81,8 +81,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, user> SelectForid(long methodfield_) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForid(long methodfield_) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from user where id=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -103,8 +103,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, user> SelectForusername(String methodfield_) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForusername(String methodfield_) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from user where username=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -126,8 +126,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String, user> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
-  Map<String, user> classmap = new HashMap<>();
+public Map<String,user> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
+  Map<String,user> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();

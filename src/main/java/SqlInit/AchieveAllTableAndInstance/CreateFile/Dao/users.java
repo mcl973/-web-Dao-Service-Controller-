@@ -2,17 +2,11 @@ package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
 
 import Annotation_Collection.Sql.Dao;
 
-import java.sql.Date;
-
-@Dao("user")
-public class user{public Date birthday;
-public Date getbirthday(){
+@Dao("users")
+public class users {public String birthday;
+public String getbirthday(){
 return birthday;}
-public void setbirthday(Date args){this.birthday=args;}
-public String address;
-public String getaddress(){
-return address;}
-public void setaddress(String args){this.address=args;}
+public void setbirthday(String args){this.birthday=args;}
 public String sex;
 public String getsex(){
 return sex;}

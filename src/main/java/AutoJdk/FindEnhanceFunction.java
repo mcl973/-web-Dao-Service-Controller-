@@ -15,6 +15,7 @@ import Annotation_Collection.Aop.Before;
 import Annotation_Collection.RouteMap.RouteMapping;
 import MyService.AopMethods.BaseInterface;
 import ScannerAndInstance.Instance.GetJieXi;
+import ScannerAndInstance.Instance.JieXiAnnotationInterface;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -93,7 +94,10 @@ public class FindEnhanceFunction {
 
     //这个参数是否支持自动注入，如果支持则返回其上的注解中的值，否则返回null
     public String isHasParagrameAutowrite(Parameter parameter){
-        return GetJieXi.getJieXi(parameter).JiexiAnnotation(parameter);
+        JieXiAnnotationInterface jieXi = GetJieXi.getJieXi(parameter);
+        if (jieXi != null)
+            return jieXi.JiexiAnnotation(parameter);
+        return null;
     }
 
     //获取带有value函数的注解

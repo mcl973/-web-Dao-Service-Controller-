@@ -1,5 +1,10 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import java.sql.Timestamp;
-import Annotation_Collection.Sql.*;@Dao("items")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+import java.sql.Timestamp;
+
+@Dao("items")
 public class items{public Timestamp createtime;
 public Timestamp getcreatetime(){
 return createtime;}

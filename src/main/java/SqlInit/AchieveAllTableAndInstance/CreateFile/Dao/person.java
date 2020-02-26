@@ -1,4 +1,8 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import Annotation_Collection.Sql.*;@Dao("person")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+@Dao("person")
 public class person{public String birthday;
 public String getbirthday(){
 return birthday;}

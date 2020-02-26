@@ -14,8 +14,8 @@ import java.util.Map;
 @DaoSql("community_sql")public class community_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, community> SelectForcommunitytohome(long methodfield_) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForcommunitytohome(long methodfield_) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from community where communitytohome=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -36,8 +36,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, community> SelectForcounts(long methodfield_) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForcounts(long methodfield_) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from community where counts=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -58,8 +58,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, community> SelectForcommunityintroduce(String methodfield_) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForcommunityintroduce(String methodfield_) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from community where communityintroduce=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -80,8 +80,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, community> SelectForcommunityname(String methodfield_) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForcommunityname(String methodfield_) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from community where communityname=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -102,8 +102,8 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, community> SelectForcommunityid(long methodfield_) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForcommunityid(long methodfield_) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
   ResultSet resultSet = statement.executeQuery("select * from community where communityid=\"" +methodfield_+"\";");
   int m = 0;
   while(resultSet.next()){
@@ -125,8 +125,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String, community> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
-  Map<String, community> classmap = new HashMap<>();
+public Map<String,community> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
+  Map<String,community> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();

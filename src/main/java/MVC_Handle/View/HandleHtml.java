@@ -22,6 +22,7 @@ import java.util.Vector;
  * @create 2020/02/21
  * @since 1.0.0
  */
+@Deprecated
 public class HandleHtml {
     /*
         总的来说时分为了三步走战略：
@@ -29,6 +30,7 @@ public class HandleHtml {
         2.分，找值代替
         3.合
      */
+    @Deprecated
     public String wrapetheresult(String html,Object object,String objectname){
         //读取，找，局部代替
         String result = HtmlToString(html);
@@ -53,24 +55,33 @@ public class HandleHtml {
     private String HtmlToString(String html){
         char[] chars = html.toCharArray();
         int i = 0;
+        int forflag = 0;
         String str = "";
         String result = "";
+        String forresult = "";
         for (char aChar : chars) {
             //起始点<<<<<<<<<<<<<<<<<<<<<<
             if (aChar=='$') {
                 i = 1;
                 continue;
             }
-            if (i==1) {
+            if (aChar == '@'){
+                forflag = 1;
+                continue;
+            }
+            if (i == 1) {
                 if (aChar == '{')
                     continue;
                 else if (aChar == '}')
                     //终点>>>>>>>>>>>>>>>>>>>>>>>>>>
-                    i= 0;
+                    i = 0;
                 else {
-                    result+=aChar;
+                    result += aChar;
                 }
                 continue;
+            }
+            if (forflag == 1){
+//
             }
             if (!result.equals("")) {
                 //合并处理---------------------------------

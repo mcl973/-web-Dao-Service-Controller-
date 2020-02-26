@@ -60,6 +60,7 @@ public class GetJieXi {
     }
 
     public static JieXiAnnotationInterface getJieXi(Method method){
+
         if (method.isAnnotationPresent(Before.class))
             return new JieXiBefore();
         else if (method.isAnnotationPresent(After.class))

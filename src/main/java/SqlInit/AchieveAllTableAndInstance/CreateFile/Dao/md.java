@@ -1,4 +1,8 @@
-package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;import Annotation_Collection.Sql.*;@Dao("md")
+package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
+
+import Annotation_Collection.Sql.Dao;
+
+@Dao("md")
 public class md{public String name;
 public String getname(){
 return name;}

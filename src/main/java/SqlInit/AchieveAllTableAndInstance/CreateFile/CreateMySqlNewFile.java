@@ -44,7 +44,6 @@ public class CreateMySqlNewFile implements Instance {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     public String getnewpath(String path){
         String[] outs = path.split("out");

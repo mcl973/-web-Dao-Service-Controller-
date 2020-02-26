@@ -10,12 +10,19 @@
 package MyService.impl;
 
 import Annotation_Collection.Aop.After;
+import Annotation_Collection.Aop.Before;
 import Annotation_Collection.JAutowrite.Autowrite;
 import Annotation_Collection.JParagrame.Paragrame;
 import Annotation_Collection.JService.Service;
 import MyService.Interface.example;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.md_sql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.mycontext_sql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.user_sql;
+import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.users_sql;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +40,12 @@ public class exampleimpl implements example {
     @Autowrite("md_sql")
     public md_sql ms;
 
+    @Autowrite("users_sql")
+    public users_sql us;
+
+    @Autowrite("mycontext_sql")
+    public mycontext_sql mycontext_sql;
+
     @After("MyService.AopMethods.After.AfterAop")
     @Override
     public Map<String, md> show(@Paragrame("pingan") String name) {
@@ -45,4 +58,29 @@ public class exampleimpl implements example {
         }
         return map;
     }
+
+    @Before("MyService.AopMethods.Before.BeforeAop2")
+    @Override
+    public Map<String, users> login(String name) {
+        Map<String, users> stringuserMap = null;
+        try {
+            stringuserMap = us.SelectForusername(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stringuserMap;
+    }
+
+    @Override
+    public Map<String, mycontext> getAllContext(String name) {
+        Map<String, mycontext> stringmycontextMap = null;
+        try {
+            stringmycontextMap = mycontext_sql.SelectForusername(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stringmycontextMap;
+    }
+
+
 }
