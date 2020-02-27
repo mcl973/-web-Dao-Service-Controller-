@@ -19,11 +19,10 @@ package AllConfigure.HtmlBasePath;
  */
 public interface HtmlBasePath {
     //配置url的前缀，废弃
-    String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\JSP\\";
+//    src/main/webapp/WEB-INF/JSP/DataShow.jsp
+    String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\WEB-INF\\JSP\\";
     //配置url的后缀名
     String HouZhuiMing = ".jsp";
-    String HttpPath = "/JSP/"; //这里填写的是jsp文件放置的相对位置，在我的项目中在WebApp下面.
-                                //切记不能放在WebApp/WEB-INF下面，不然会有问题，具体的问题就是解析不到jsp文件
-                                //我想tomcat应该是做了手脚的，即定好了WEB-INF问配置文件的地方，html、jsp文件不能放在这里
+    String HttpPath = "/JSP/"; //配置url的前缀
 
 }

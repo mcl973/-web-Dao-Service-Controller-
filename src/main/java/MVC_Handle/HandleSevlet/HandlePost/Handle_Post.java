@@ -15,6 +15,8 @@ import MVC_Handle.Model.Models;
 import MVC_Handle.View.View;
 import ScannerAndInstance.AbstractBean;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -45,15 +47,25 @@ public class Handle_Post implements PostMethods{
 
         Models object = new GetModel().getmodel(url,req,resp);
         if (object != null) {
-            if (!object.isModelNull()) {
-                View view = null;
-                    //获取view
-                view = new View(object);
+            View view = new View(object);
+            if (!object.isMapModelNull()) {
                 //开始渲染
                 view.GetResult(req,resp);
-            } else {
+            }else if (!object.isUrlNull()){
                 try {
-                    resp.sendRedirect(object.getRedircturl());
+                    String redircturl = view.getModel().getRedircturl();
+                    if (redircturl.contains("WEB-INF")) {
+                        RequestDispatcher requestDispatcher = view.getRequestDispatcher(redircturl, req);
+                        requestDispatcher.forward(req, resp);
+                    }else {
+                        resp.sendRedirect(redircturl);
+                    }
+                } catch (IOException | ServletException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                try {
+                    resp.getWriter().write("null");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -29,7 +29,13 @@ public class Models implements HtmlBasePath {
     //废弃
     String redircturl ;
     public boolean isModelNull(){
-        return model.size() ==0;
+        return model.size() == 0 && (url==null || url.equals(""));
+    }
+    public boolean isMapModelNull(){
+        return model.size() == 0;
+    }
+    public boolean isUrlNull(){
+        return url == null || url.equals("");
     }
     public void setModel(String name,Object[] object){
         model.put(name,object);

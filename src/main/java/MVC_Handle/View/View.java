@@ -37,6 +37,18 @@ public class View {
     public View(Models model){
         this.model=model;
     }
+    public View(){
+
+    }
+
+    public Models getModel() {
+        return model;
+    }
+
+    public void setModel(Models model) {
+        this.model = model;
+    }
+
     @Deprecated
     public View(Models model,PrintWriter printWriter){
         this.model=model;
@@ -135,7 +147,7 @@ public class View {
         //那渠道相应的数据了
         exposetoRequest(model,req);
         //这是一个ApplicationDispatcher实例
-        RequestDispatcher dispatcher = req.getRequestDispatcher(this.model.getRedircturl());
+        RequestDispatcher dispatcher = getRequestDispatcher(this.model.getRedircturl(),req);
 //        changeDispatcher_URI_ServletPath(dispatcher.getClass(),dispatcher);
         if (dispatcher != null) {
             try {
@@ -146,23 +158,29 @@ public class View {
         }
     }
 
-    //废弃
-    @Deprecated
-    public void changeDispatcher_URI_ServletPath(Class clazz,RequestDispatcher requestDispatcher){
+    public RequestDispatcher getRequestDispatcher(String url,HttpServletRequest req){
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(url);
+        changeDispatcher_URI_ServletPath(requestDispatcher);
+        return requestDispatcher;
+    }
+
+
+    public void changeDispatcher_URI_ServletPath(RequestDispatcher requestDispatcher){
         try {
+            Class<? extends RequestDispatcher> clazz = requestDispatcher.getClass();
             Field requestURI = clazz.getDeclaredField("requestURI");
             requestURI.setAccessible(true);
             Field servletPath = clazz.getDeclaredField("servletPath");
             servletPath.setAccessible(true);
             String requesturl = (String)requestURI.get(requestDispatcher);
-            if (!isLink(requesturl)){
+            if (isLink(requesturl)){
                 String[] split = requesturl.split("/");
                 String s = WrapLink(split);
                 if (!s.equals(""))
                     requestURI.set(requestDispatcher,s);
             }
             String servletpath = (String)servletPath.get(requestDispatcher);
-            if (!isLink(servletpath)){
+            if (isLink(servletpath)){
                 String[] split = servletpath.split("/");
                 String s = WrapLink(split);
                 if (!s.equals(""))
@@ -173,15 +191,19 @@ public class View {
         }
     }
 
+    //对于放在WEB-INF文件夹下的文件，需要重新定义连接
     public String WrapLink(String[] links){
         String result = "";
         int StartToWrap = 0;
         for(int i=0;i<links.length-1;i++) {
-            if (links[i].equals("JSP")){
+            if (links[i].equals("WEB-INF")){
                 StartToWrap = 1;
             }
             if (StartToWrap == 1) {
-                result += links[i] + "/";
+                if (links[i].equals("WEB-INF"))
+                    result += "/"+links[i] + "/";
+                else
+                    result += links[i] + "/";
             }
         }
         result+=links[links.length-1];
@@ -189,8 +211,7 @@ public class View {
     }
 
     public boolean isLink(String weblink){
-        String[] split = weblink.split("/");
-        if (split[0].equals("http:"))
+        if (weblink.contains("WEB-INF"))
             return true;
         else return false;
     }
