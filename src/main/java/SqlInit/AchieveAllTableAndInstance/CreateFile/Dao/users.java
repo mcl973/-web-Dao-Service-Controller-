@@ -3,7 +3,7 @@ package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
 import Annotation_Collection.Sql.Dao;
 
 @Dao("users")
-public class users {public String birthday;
+public class users{public String birthday;
 public String getbirthday(){
 return birthday;}
 public void setbirthday(String args){this.birthday=args;}

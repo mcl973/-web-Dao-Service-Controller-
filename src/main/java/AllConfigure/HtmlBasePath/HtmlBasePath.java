@@ -23,6 +23,6 @@ public interface HtmlBasePath {
     String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\WEB-INF\\JSP\\";
     //配置url的后缀名
     String HouZhuiMing = ".jsp";
-    String HttpPath = "/JSP/"; //配置url的前缀
+    String HttpPath = "/WEB-INF/JSP/"; //配置url的前缀
 
 }

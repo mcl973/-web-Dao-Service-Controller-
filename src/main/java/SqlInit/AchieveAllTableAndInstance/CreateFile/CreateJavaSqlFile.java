@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author Administrator
@@ -77,8 +77,8 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         String MethodBody = introduce+"public Map<String,"+classname+"> SelectFor"+methodfield+"("+fieldmap.get(methodfield)+" methodfield_) throws Exception{\n";
         MethodBody+="  Map<String,"+classname+"> classmap = new HashMap<>();\n";
         String sql = "select * from "+classname+" where "+methodfield+"="+"\\\"\" +methodfield_+\"\\\";";
-        MethodBody+="  ResultSet resultSet = statement.executeQuery" +
-            "(\""+sql+"\");\n";
+        MethodBody+="  ResultSet resultSet;\nreadLock.lock();\n resultSet = statement.executeQuery" +
+                "(\""+sql+"\");\n readLock.unlock();\n";
         MethodBody+="  int m = 0;\n";
         MethodBody+="  while(resultSet.next()){\n";
         int k = 0;
@@ -123,8 +123,8 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         MethodBody+=getout;
         //开始组装成一个sql
         String sql = "select \"+out+\" from "+classname+" where \"+select+\";";
-        MethodBody+="  ResultSet resultSet = statement.executeQuery" +
-        "(\""+sql+"\");\n";
+        MethodBody+="  ResultSet resultSet;\nreadLock.lock();\n resultSet = statement.executeQuery" +
+                "(\""+sql+"\");\n readLock.unlock();\n";
         //开始获取输出的结果
         MethodBody+="  int m = 0;\n";
         MethodBody+="  while(resultSet.next()){\n";
@@ -132,12 +132,12 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         //现在有值了，那就要通过这个值也就是列明区获取相应的类型
         MethodBody+="if(outfield == null){\n";
         MethodBody+= "\n" +
-            "Field[] fields = cn.getClass().getFields(); \n" +
-            "String result = \"\";\n" +
-            "for (Field field : fields) { \n" +
-             "field.setAccessible(true);\n"+
-            "field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));\n"+
-            "}\n";
+                "Field[] fields = cn.getClass().getFields(); \n" +
+                "String result = \"\";\n" +
+                "for (Field field : fields) { \n" +
+                "field.setAccessible(true);\n"+
+                "field.set(cn,TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));\n"+
+                "}\n";
         MethodBody+="}else{\nfor(String s1 : outfield) {\n";
         //            MethodBody += "String var+k = resultSet.getString(s1);\n";
         MethodBody += "Field field = cn.getClass().getField(s1);\n";
@@ -176,12 +176,10 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         updatemethod+=" k = 0;\n";
         updatemethod+="String sql = \"update "+classname+"  set \"+sets+\" where \"+wheres+\";\";\n";
         updatemethod+=" \n";
-        updatemethod+=" if (!statement.execute(sql)) {\n";
-        updatemethod+=" return true;\n";
-        updatemethod+="   }\n";
-        updatemethod+=" else\n";
-        updatemethod+=" return false;\n";
-        updatemethod+=" \n";
+        updatemethod+=" writeLock.lock();\n";
+        updatemethod+=" boolean istrue = !statement.execute(sql);\n";
+        updatemethod+=" writeLock.unlock();\n";
+        updatemethod+="return istrue;\n";
         return updatemethod+"}\n";
     }
     public String GetDeleteMethod(String classname){
@@ -198,12 +196,10 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         deletemethod += "deletes+=\" , \"+map.getKey()+\"=\\\"\"+map.getValue()+\"\\\"\";\n";
         deletemethod += "  }\n";
         deletemethod += " String sql = \"delete from "+classname+" where \"+deletes+\";\";\n";
-        deletemethod+=" if (!statement.execute(sql)) {\n";
-        deletemethod+=" return true;\n";
-        deletemethod+="   }\n";
-        deletemethod+=" else\n";
-        deletemethod+=" return false;\n";
-        deletemethod+=" }\n";
+        deletemethod+=" writeLock.lock();\n";
+        deletemethod+=" boolean istrue = !statement.execute(sql);\n";
+        deletemethod+=" writeLock.unlock();\n" +
+                "return istrue;\n}\n";
         return deletemethod;
     }
     public String GetInsertMethod(String classname) {
@@ -226,12 +222,9 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         insertmethod+=" k++;\n";
         insertmethod+="   }\n";
         insertmethod+=" String sql = \"insert into "+classname+"(\"+insertbefore+\") values(\"+insertafter+\");\";\n";
-        insertmethod+=" if (!statement.execute(sql)) {\n";
-        insertmethod+=" return true;\n";
-        insertmethod+="   }\n";
-        insertmethod+=" else\n";
-        insertmethod+=" return false;\n";
-        insertmethod+=" }\n";
+        insertmethod+="writeLock.lock();\n";
+        insertmethod+=" boolean istrue = !statement.execute(sql);\n";
+        insertmethod+=" writeLock.unlock();\nreturn istrue; \n}\n";
         return insertmethod;
     }
 
@@ -244,17 +237,17 @@ public class CreateJavaSqlFile extends AbstractGenerateFile implements CreateMet
         batchmethod += " try {\n";
         batchmethod += " autoCommit = connection.getAutoCommit();\n";
         batchmethod += " int k = 0;\n";
-        batchmethod += " for (String sql : sqls) {\n";
+        batchmethod += "writeLock.lock();\n for (String sql : sqls) {\n";
         batchmethod += " if (k>=1000){\n";
         batchmethod += "   k = 0;\n";
-        batchmethod += "   statement.executeBatch();\n";
+        batchmethod += "  \n statement.executeBatch();\n";
         batchmethod += " connection.commit();\n";
-        batchmethod += "   }\n";
+        batchmethod += "   \n}\n";
         batchmethod += "  statement.addBatch(sql);\n";
         batchmethod += "         }\n";
-        batchmethod += "    statement.executeBatch();\n";
+        batchmethod += " \n   statement.executeBatch();\n";
         batchmethod += " connection.commit();\n";
-        batchmethod += " connection.setAutoCommit(autoCommit);\n";
+        batchmethod += " connection.setAutoCommit(autoCommit);\n writeLock.unlock(); \n";
         batchmethod += " return true;\n";
         batchmethod += " } catch (Exception e) {\n";
         batchmethod += "  try {\n";

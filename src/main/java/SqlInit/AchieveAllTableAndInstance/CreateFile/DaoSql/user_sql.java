@@ -17,7 +17,10 @@ import java.util.Map;
  参数为需要匹配的值，只传入值*/
 public Map<String,user> SelectForbirthday(Date methodfield_) throws Exception{
   Map<String,user> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from user where birthday=\"" +methodfield_+"\";");
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from user where birthday=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -39,7 +42,10 @@ m++;
  参数为需要匹配的值，只传入值*/
 public Map<String,user> SelectForaddress(String methodfield_) throws Exception{
   Map<String,user> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from user where address=\"" +methodfield_+"\";");
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from user where address=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -61,7 +67,10 @@ m++;
  参数为需要匹配的值，只传入值*/
 public Map<String,user> SelectForsex(String methodfield_) throws Exception{
   Map<String,user> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from user where sex=\"" +methodfield_+"\";");
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from user where sex=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -83,7 +92,10 @@ m++;
  参数为需要匹配的值，只传入值*/
 public Map<String,user> SelectForid(long methodfield_) throws Exception{
   Map<String,user> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from user where id=\"" +methodfield_+"\";");
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from user where id=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -105,7 +117,10 @@ m++;
  参数为需要匹配的值，只传入值*/
 public Map<String,user> SelectForusername(String methodfield_) throws Exception{
   Map<String,user> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from user where username=\"" +methodfield_+"\";");
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from user where username=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -146,7 +161,10 @@ if(tempk==0){
 out+=s;
 }else{
 out+=","+s;
-} tempk++;}}  ResultSet resultSet = statement.executeQuery("select "+out+" from user where "+select+";");
+} tempk++;}}  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select "+out+" from user where "+select+";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 user cn = new user();
@@ -198,12 +216,10 @@ String sets = "";
  k = 0;
 String sql = "update user  set "+sets+" where "+wheres+";";
  
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- 
+ writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue;
 }
  /*这个是一个单个删除的函数，用于处理删除，
 传进来的是一个包含有需要删除的具体项的map，
@@ -219,12 +235,11 @@ public boolean deleteformore(Map<String,Object> mapdelete)throws Exception{
 deletes+=" , "+map.getKey()+"=\""+map.getValue()+"\"";
   }
  String sql = "delete from user where "+deletes+";";
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- }
+ writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue;
+}
 /*这个是单个处理插入的程序,需要传入的参数是一个关于这个跟表的对象*/
 public boolean insertmethod(user object)throws Exception{
  
@@ -243,12 +258,11 @@ insertafter += "\""+field.get(object)+"\"";
  k++;
    }
  String sql = "insert into user("+insertbefore+") values("+insertafter+");";
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- }
+writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue; 
+}
 /*批量处理程序，可以处理大批量的sql语句，这里没有写死只需要将包含有sql语句的字符串数组传进来就可以了 */
  public boolean excuteBatch(String[] sqls) {
  boolean autoCommit = false;
@@ -256,17 +270,22 @@ insertafter += "\""+field.get(object)+"\"";
  try {
  autoCommit = connection.getAutoCommit();
  int k = 0;
+writeLock.lock();
  for (String sql : sqls) {
  if (k>=1000){
    k = 0;
-   statement.executeBatch();
+  
+ statement.executeBatch();
  connection.commit();
-   }
+   
+}
   statement.addBatch(sql);
          }
-    statement.executeBatch();
+ 
+   statement.executeBatch();
  connection.commit();
  connection.setAutoCommit(autoCommit);
+ writeLock.unlock(); 
  return true;
  } catch (Exception e) {
   try {

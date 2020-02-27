@@ -34,6 +34,7 @@ import java.lang.reflect.Method;
 import java.nio.Buffer;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.community;
 //import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
@@ -81,7 +82,6 @@ public class test  {
                 //为每一张表建立dao、daosql文件
                 createMySqlNewFile.instance(map.getValue().getTablename(),map.getValue().getMap());
             }
-
 
 //        test1.testProxyGenetate();
 

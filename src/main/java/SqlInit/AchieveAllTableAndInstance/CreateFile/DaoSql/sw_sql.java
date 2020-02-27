@@ -14,9 +14,12 @@ import java.util.Map;
 @DaoSql("sw_sql")public class sw_sql extends AbstractSql {
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, sw> SelectForrequired_bw(String methodfield_) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where required_bw=\"" +methodfield_+"\";");
+public Map<String,sw> SelectForrequired_bw(String methodfield_) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from sw where required_bw=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -36,9 +39,12 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, sw> SelectForsw_mac(String methodfield_) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_mac=\"" +methodfield_+"\";");
+public Map<String,sw> SelectForsw_mac(String methodfield_) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from sw where sw_mac=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -58,9 +64,12 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, sw> SelectFormax_delay(String methodfield_) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where max_delay=\"" +methodfield_+"\";");
+public Map<String,sw> SelectFormax_delay(String methodfield_) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from sw where max_delay=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -80,9 +89,12 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, sw> SelectForsw_id(String methodfield_) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_id=\"" +methodfield_+"\";");
+public Map<String,sw> SelectForsw_id(String methodfield_) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from sw where sw_id=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -102,9 +114,12 @@ m++;
 }
 /*单个查询，输出匹配的所有的值，只能单个匹配
  参数为需要匹配的值，只传入值*/
-public Map<String, sw> SelectForsw_ip(String methodfield_) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
-  ResultSet resultSet = statement.executeQuery("select * from sw where sw_ip=\"" +methodfield_+"\";");
+public Map<String,sw> SelectForsw_ip(String methodfield_) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
+  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select * from sw where sw_ip=\"" +methodfield_+"\";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -125,8 +140,8 @@ m++;
  /*单个多参数查询，包含两个参数均为map
  第二个数组为select和from之间的内容,为列名
  第一个为map是where后面的内容，key为列名，value为匹配的值*/
-public Map<String, sw> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
-  Map<String, sw> classmap = new HashMap<>();
+public Map<String,sw> SelectForMore(Map<String, Object> selectfields,String[] outfield) throws Exception{
+  Map<String,sw> classmap = new HashMap<>();
 int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
  if (tempk == 0) {
 select += map.getKey() +"="+ map.getValue();
@@ -145,7 +160,10 @@ if(tempk==0){
 out+=s;
 }else{
 out+=","+s;
-} tempk++;}}  ResultSet resultSet = statement.executeQuery("select "+out+" from sw where "+select+";");
+} tempk++;}}  ResultSet resultSet;
+readLock.lock();
+ resultSet = statement.executeQuery("select "+out+" from sw where "+select+";");
+ readLock.unlock();
   int m = 0;
   while(resultSet.next()){
 sw cn = new sw();
@@ -197,12 +215,10 @@ String sets = "";
  k = 0;
 String sql = "update sw  set "+sets+" where "+wheres+";";
  
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- 
+ writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue;
 }
  /*这个是一个单个删除的函数，用于处理删除，
 传进来的是一个包含有需要删除的具体项的map，
@@ -218,12 +234,11 @@ public boolean deleteformore(Map<String,Object> mapdelete)throws Exception{
 deletes+=" , "+map.getKey()+"=\""+map.getValue()+"\"";
   }
  String sql = "delete from sw where "+deletes+";";
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- }
+ writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue;
+}
 /*这个是单个处理插入的程序,需要传入的参数是一个关于这个跟表的对象*/
 public boolean insertmethod(sw object)throws Exception{
  
@@ -242,12 +257,11 @@ insertafter += "\""+field.get(object)+"\"";
  k++;
    }
  String sql = "insert into sw("+insertbefore+") values("+insertafter+");";
- if (!statement.execute(sql)) {
- return true;
-   }
- else
- return false;
- }
+writeLock.lock();
+ boolean istrue = !statement.execute(sql);
+ writeLock.unlock();
+return istrue; 
+}
 /*批量处理程序，可以处理大批量的sql语句，这里没有写死只需要将包含有sql语句的字符串数组传进来就可以了 */
  public boolean excuteBatch(String[] sqls) {
  boolean autoCommit = false;
@@ -255,17 +269,22 @@ insertafter += "\""+field.get(object)+"\"";
  try {
  autoCommit = connection.getAutoCommit();
  int k = 0;
+writeLock.lock();
  for (String sql : sqls) {
  if (k>=1000){
    k = 0;
-   statement.executeBatch();
+  
+ statement.executeBatch();
  connection.commit();
-   }
+   
+}
   statement.addBatch(sql);
          }
-    statement.executeBatch();
+ 
+   statement.executeBatch();
  connection.commit();
  connection.setAutoCommit(autoCommit);
+ writeLock.unlock(); 
  return true;
  } catch (Exception e) {
   try {
