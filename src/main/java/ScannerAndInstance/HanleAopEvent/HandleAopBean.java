@@ -75,9 +75,11 @@ public class HandleAopBean extends AbstractHandleAopBean {
             if (method.isAnnotationPresent(RouteMapping.class))
                 continue;
             JieXiAnnotationInterface jieXi = GetJieXi.getJieXi(method);
-            result = jieXi.JiexiAnnotation(method);
-            if (result!=null)
-                return result;
+            if (jieXi!=null) {
+                result = jieXi.JiexiAnnotation(method);
+                if (result != null)
+                    return result;
+            }
         }
         return result;
     }

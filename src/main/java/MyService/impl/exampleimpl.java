@@ -46,8 +46,8 @@ public class exampleimpl implements example {
     @Autowrite("mycontext_sql")
     public mycontext_sql mycontext_sql;
 
-    @After("MyService.AopMethods.After.AfterAop")
     @Override
+    @After("MyService.AopMethods.After.AfterAop")
     public Map<String, md> show(@Paragrame("pingan") String name) {
         System.out.println(name);
         Map<String,md> map = null;
@@ -59,8 +59,8 @@ public class exampleimpl implements example {
         return map;
     }
 
-    @Before("MyService.AopMethods.Before.BeforeAop2")
     @Override
+    @Before("MyService.AopMethods.Before.BeforeAop2")
     public Map<String, users> login(String name) {
         Map<String, users> stringuserMap = null;
         try {

@@ -29,8 +29,7 @@ public class BeforeAop2 implements BaseInterface {
         if (before == null)
             return null;
         try {
-            Object invo = method.invoke(object, objects);
-            return invo;
+            return method.invoke(object, objects);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

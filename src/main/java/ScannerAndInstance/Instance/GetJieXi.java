@@ -38,15 +38,21 @@ import java.lang.reflect.Parameter;
 public class GetJieXi {
     //应该在后续的过程中添加关于多注解的解释
     public static JieXiAnnotationInterface getJieXi(Class clazz){
-        JieXiAnnotationInterface jxi = null;
         Annotation[] annotations = clazz.getAnnotations();
         for (Annotation annotation : annotations) {
-            if ((jxi=getJxi(annotation)) != null)
-                break;
+            if (annotation instanceof Dao)
+                return new JieXiDao();
+            else if(annotation instanceof DaoSql)
+                return new JieXiDaoSql();
+            else if (annotation instanceof Service)
+                return new JieXiService();
+            else if (annotation instanceof Controller)
+                return new JieXiController();
         }
-        return jxi;
+        return null;
     }
 
+    @Deprecated
     private static JieXiAnnotationInterface getJxi(Annotation annotation){
         if (annotation instanceof Dao)
             return new JieXiDao();
@@ -60,25 +66,37 @@ public class GetJieXi {
     }
 
     public static JieXiAnnotationInterface getJieXi(Method method){
-
-        if (method.isAnnotationPresent(Before.class))
-            return new JieXiBefore();
-        else if (method.isAnnotationPresent(After.class))
-            return new JieXinAfter();
-        else if (method.isAnnotationPresent(Around.class))
-            return new JieXiAround();
-        else return new JieXiMySelf();
+        Annotation[] annotations = method.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof Before)
+                return new JieXiBefore();
+            else if (annotation instanceof After)
+                return new JieXinAfter();
+            else if (annotation instanceof Around)
+                return new JieXiAround();
+            else {
+                if (JieXiMySelf.MySelfAnnotation(annotation))
+                    return new JieXiMySelf(annotation);
+            }
+        }
+        return null;
     }
 
     public static JieXiAnnotationInterface getJieXi(Parameter parameter){
-        if (parameter.isAnnotationPresent(Paragrame.class))
-            return new JieXiParagrame();
+        Annotation[] annotations = parameter.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof Paragrame)
+                return new JieXiParagrame();
+        }
         return null;
     }
 
     public static JieXiAnnotationInterface getJieXi(Field field){
-        if (field.isAnnotationPresent(Autowrite.class))
-            return new JieXiAutowrite();
+        Annotation[] annotations = field.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof Autowrite)
+                return new JieXiAutowrite();
+        }
         return null;
     }
 }

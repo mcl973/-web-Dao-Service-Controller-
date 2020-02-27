@@ -27,6 +27,15 @@ import java.lang.reflect.Parameter;
  * @since 1.0.0
  */
 public class JieXiMySelf implements JieXiAnnotationInterface {
+    private Annotation annotation;
+    public JieXiMySelf( Annotation annotation){
+        this.annotation = annotation;
+    }
+
+    public Annotation getAnnotation() {
+        return annotation;
+    }
+
     @Override
     public String JiexiAnnotation(Class clazz) {
         return null;
@@ -34,17 +43,28 @@ public class JieXiMySelf implements JieXiAnnotationInterface {
 
     @Override
     public String JiexiAnnotation(Method clazz) {
-        Annotation[] annotations = clazz.getAnnotations();
-        String values = "";
-        for (Annotation annotation : annotations) {
-            if (annotation instanceof Override)
-                continue;
-            values+=getValueMethodreturn(annotation,findvaluemethod(annotation.getClass()));
-            values+="myself";
-        }
-        if (!values.equals(""))
-            return values;
-        else return null;
+//        Annotation[] annotations = clazz.getAnnotations();
+//        String values = "";
+//        for (Annotation annotation : annotations) {
+//            //只要不是自己实现的，即其package的名称不包含Annotation_Collection.MySelf
+//            //就表示这是一个java自己的annotation
+//            if (!MySelfAnnotation(annotation))
+//                continue;
+//            values+=getValueMethodreturn(annotation,findvaluemethod(annotation.getClass()));
+//            values+="myself";
+//        }
+//        if (!values.equals(""))
+//            return values;
+//        else return null;
+        return getValueMethodreturn(this.annotation,findvaluemethod(this.annotation.getClass()));
+    }
+
+    public static boolean MySelfAnnotation(Annotation annotation){
+//        Annotation_Collection.MySelf
+        Class<? extends Annotation> aClass = annotation.getClass();
+        Package aPackage = aClass.getPackage();
+        String name = aPackage.getName();
+        return name.contains("Annotation_Collection.MySelf");
     }
 
     @Override

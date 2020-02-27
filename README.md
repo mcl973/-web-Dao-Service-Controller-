@@ -4,6 +4,7 @@
         实现了jsp页面渲染，主要是通过ApplicationDispattcher的forward（）方法来实现页面的跳转，其数据的传递是通过request的setAttribute和getAttribute来设置和获取数据。
         目前只支持jsp页面的渲染。
         改了些bug。
+        第五版，修改了Annotation的一些检查，使得检查的更加彻底和更加的适用于本框架中的代码
 # 特点：
     1.这个框架可以把数据库中的表生成对应的java文件和简单的增删改查java文件，其中增删改查可以多参数查询和多参数输出，也可以批量增删改。
     2.实现了aop
