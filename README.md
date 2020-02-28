@@ -123,12 +123,22 @@
                                         createMySqlNewFile.instance(map.getValue().getTablename(),map.getValue().getMap());
                             }
                  （3）此时就可以在src/main/java/SqlInit/AchieveAllTableAndInstance/CreateFile下可以看见两个文件夹了Dao、DaoSql.
+                        ***用户可以自实现自己的Sql代码，但是需要注意的是自实现的sql类需要继承AbstractSql类，以下是AbstractSql的代码内容：
+                                public abstract  class AbstractSql {
+                                    public static Map<String,String> sqlinitmap = new HashMap<>();
+                                    public static Statement statement = null;    //Statement
+                                    public static Connection connection = null;  //Connection
+                                    final static private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+                                    //读锁，此所为共享锁
+                                    public final static ReentrantReadWriteLock.ReadLock readLock = reentrantReadWriteLock.readLock();
+                                    //写锁，此锁为独占锁
+                                    public final static ReentrantReadWriteLock.WriteLock writeLock = reentrantReadWriteLock.writeLock();
+                                        -	 读	   写
+                                        读	非阻塞	阻塞
+                                        写	阻塞	 阻塞
+                                }
                            样例：
                                Dao：
-                                 package SqlInit.AchieveAllTableAndInstance.CreateFile.Dao;
-
-                                import Annotation_Collection.Sql.Dao;
-
                                 @Dao("community")
                                 public class community{public long communitytohome;
                                 public long getcommunitytohome(){
@@ -152,18 +162,6 @@
                                 public void setcommunityid(long args){this.communityid=args;}
                                 }
                             DaoSql：
-                                package SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql;
-
-                                import Annotation_Collection.Sql.DaoSql;
-                                import SqlInit.AbstractSql;
-                                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.community;
-                                import SqlInit.AchieveAllTableAndInstance.CreateFile.TypeTrans;
-
-                                import java.lang.reflect.Field;
-                                import java.sql.ResultSet;
-                                import java.util.HashMap;
-                                import java.util.Map;
-
                                 /*本程序框架代码由自动生成*/
                                 @DaoSql("community_sql")public class community_sql extends AbstractSql {
                                 /*单个查询，输出匹配的所有的值，只能单个匹配
@@ -191,378 +189,78 @@
                                 m++;
                                 }return classmap;
                                 }
-                                /*单个查询，输出匹配的所有的值，只能单个匹配
-                                 参数为需要匹配的值，只传入值*/
-                                public Map<String, community> SelectForcounts(long methodfield_) throws Exception{
-                                  Map<String, community> classmap = new HashMap<>();
-                                  ResultSet resultSet;
-                                readLock.lock();
-                                 resultSet = statement.executeQuery("select * from community where counts=\"" +methodfield_+"\";");
-                                 readLock.unlock();
-                                  int m = 0;
-                                  while(resultSet.next()){
-                                community cn = new community();
-                                String var0 = resultSet.getString("communitytohome");
-                                cn.setcommunitytohome((long) TypeTrans.getvalue("long",var0));
-                                String var1 = resultSet.getString("counts");
-                                cn.setcounts((long) TypeTrans.getvalue("long",var1));
-                                String var2 = resultSet.getString("communityintroduce");
-                                cn.setcommunityintroduce((String) TypeTrans.getvalue("String",var2));
-                                String var3 = resultSet.getString("communityname");
-                                cn.setcommunityname((String) TypeTrans.getvalue("String",var3));
-                                String var4 = resultSet.getString("communityid");
-                                cn.setcommunityid((long) TypeTrans.getvalue("long",var4));
-                                classmap.put(m+"",cn);
-                                m++;
-                                }return classmap;
-                                }
-                                /*单个查询，输出匹配的所有的值，只能单个匹配
-                                 参数为需要匹配的值，只传入值*/
-                                public Map<String, community> SelectForcommunityintroduce(String methodfield_) throws Exception{
-                                  Map<String, community> classmap = new HashMap<>();
-                                  ResultSet resultSet;
-                                readLock.lock();
-                                 resultSet = statement.executeQuery("select * from community where communityintroduce=\"" +methodfield_+"\";");
-                                 readLock.unlock();
-                                  int m = 0;
-                                  while(resultSet.next()){
-                                community cn = new community();
-                                String var0 = resultSet.getString("communitytohome");
-                                cn.setcommunitytohome((long) TypeTrans.getvalue("long",var0));
-                                String var1 = resultSet.getString("counts");
-                                cn.setcounts((long) TypeTrans.getvalue("long",var1));
-                                String var2 = resultSet.getString("communityintroduce");
-                                cn.setcommunityintroduce((String) TypeTrans.getvalue("String",var2));
-                                String var3 = resultSet.getString("communityname");
-                                cn.setcommunityname((String) TypeTrans.getvalue("String",var3));
-                                String var4 = resultSet.getString("communityid");
-                                cn.setcommunityid((long) TypeTrans.getvalue("long",var4));
-                                classmap.put(m+"",cn);
-                                m++;
-                                }return classmap;
-                                }
-                                /*单个查询，输出匹配的所有的值，只能单个匹配
-                                 参数为需要匹配的值，只传入值*/
-                                public Map<String, community> SelectForcommunityname(String methodfield_) throws Exception{
-                                  Map<String, community> classmap = new HashMap<>();
-                                  ResultSet resultSet;
-                                readLock.lock();
-                                 resultSet = statement.executeQuery("select * from community where communityname=\"" +methodfield_+"\";");
-                                 readLock.unlock();
-                                  int m = 0;
-                                  while(resultSet.next()){
-                                community cn = new community();
-                                String var0 = resultSet.getString("communitytohome");
-                                cn.setcommunitytohome((long) TypeTrans.getvalue("long",var0));
-                                String var1 = resultSet.getString("counts");
-                                cn.setcounts((long) TypeTrans.getvalue("long",var1));
-                                String var2 = resultSet.getString("communityintroduce");
-                                cn.setcommunityintroduce((String) TypeTrans.getvalue("String",var2));
-                                String var3 = resultSet.getString("communityname");
-                                cn.setcommunityname((String) TypeTrans.getvalue("String",var3));
-                                String var4 = resultSet.getString("communityid");
-                                cn.setcommunityid((long) TypeTrans.getvalue("long",var4));
-                                classmap.put(m+"",cn);
-                                m++;
-                                }return classmap;
-                                }
-                                /*单个查询，输出匹配的所有的值，只能单个匹配
-                                 参数为需要匹配的值，只传入值*/
-                                public Map<String, community> SelectForcommunityid(long methodfield_) throws Exception{
-                                  Map<String, community> classmap = new HashMap<>();
-                                  ResultSet resultSet;
-                                readLock.lock();
-                                 resultSet = statement.executeQuery("select * from community where communityid=\"" +methodfield_+"\";");
-                                 readLock.unlock();
-                                  int m = 0;
-                                  while(resultSet.next()){
-                                community cn = new community();
-                                String var0 = resultSet.getString("communitytohome");
-                                cn.setcommunitytohome((long) TypeTrans.getvalue("long",var0));
-                                String var1 = resultSet.getString("counts");
-                                cn.setcounts((long) TypeTrans.getvalue("long",var1));
-                                String var2 = resultSet.getString("communityintroduce");
-                                cn.setcommunityintroduce((String) TypeTrans.getvalue("String",var2));
-                                String var3 = resultSet.getString("communityname");
-                                cn.setcommunityname((String) TypeTrans.getvalue("String",var3));
-                                String var4 = resultSet.getString("communityid");
-                                cn.setcommunityid((long) TypeTrans.getvalue("long",var4));
-                                classmap.put(m+"",cn);
-                                m++;
-                                }return classmap;
-                                }
-                                 /*单个多参数查询，包含两个参数均为map
-                                 第二个数组为select和from之间的内容,为列名
-                                 第一个为map是where后面的内容，key为列名，value为匹配的值*/
-                                public Map<String, community> SelectForMore(Map<String, Object> selectfields, String[] outfield) throws Exception{
-                                  Map<String, community> classmap = new HashMap<>();
-                                int tempk = 0;String select = "";for(Map.Entry<String,Object> map:selectfields.entrySet()){
-                                 if (tempk == 0) {
-                                select += map.getKey() +"="+ map.getValue();
-                                }else{
-                                select += " and  " + map.getKey()+"="+map.getValue();
-                                }
-                                tempk++;
-                                };
-                                String out = "";
-                                if (outfield == null){
-                                out="*";
-                                }else{
-                                tempk = 0;
-                                for(String s : outfield){
-                                if(tempk==0){
-                                out+=s;
-                                }else{
-                                out+=","+s;
-                                } tempk++;}}  ResultSet resultSet;
-                                readLock.lock();
-                                 resultSet = statement.executeQuery("select "+out+" from community where "+select+";");
-                                 readLock.unlock();
-                                  int m = 0;
-                                  while(resultSet.next()){
-                                community cn = new community();
-                                if(outfield == null){
-
-                                Field[] fields = cn.getClass().getFields(); 
-                                String result = "";
-                                for (Field field : fields) { 
-                                field.setAccessible(true);
-                                field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(field.getName(),resultSet)));
-                                }
-                                }else{
-                                for(String s1 : outfield) {
-                                Field field = cn.getClass().getField(s1);
-                                field.set(cn, TypeTrans.getvalue(field.getType().getName(),getoneselectrecord(s1,resultSet)));
-                                }}
-                                classmap.put(m+"",cn);
-                                m++;
-                                }return classmap;
-                                }
-                                public String getoneselectrecord(String name,ResultSet resultSet)throws Exception{
-                                String var = resultSet.getString(name);
-                                return var;
-                                }
-                                /*这个是一个单个更新的函数
-                                 输入的参数是一对map
-                                 第一个map包含的是set 后面的内容，即需要更新的内容key为列名，value为需要修改的值
-                                第二个map包含的是where后面的匹配项,key为列名，value为需要匹配的值*/
-                                public boolean UpdateForMore(Map<String,Object> mapupdata,Map<String,Object> mapwhere)throws Exception{
-                                String sets = "";
-
-                                 int k = 0;
-                                 for(Map.Entry<String,Object> map:mapupdata.entrySet()){
-                                 if (k==0)
-                                 sets+=map.getKey()+"=\""+map.getValue()+"\"";
-                                 else
-                                 sets+=","+map.getKey()+"=\""+map.getValue()+"\"";
-                                 }
-                                 k = 0; 
-
-                                 String wheres = "";
-                                 for(Map.Entry<String,Object> map:mapwhere.entrySet()){ 
-                                  if (k==0)
-                                 wheres+=map.getKey()+"=\""+map.getValue()+"\"";
-                                 else
-                                 wheres+=" and "+map.getKey()+"=\""+map.getValue()+"\"";
-                                 k++; 
-                                 }
-                                 k = 0;
-                                String sql = "update community  set "+sets+" where "+wheres+";";
-
-                                 writeLock.lock();
-                                 boolean istrue = !statement.execute(sql);
-                                 writeLock.unlock();
-                                return istrue;
-                                }
-                                 /*这个是一个单个删除的函数，用于处理删除，
-                                传进来的是一个包含有需要删除的具体项的map，
-                                map里包含的是where里需要匹配的东西*/
-                                public boolean deleteformore(Map<String,Object> mapdelete)throws Exception{
-
-                                 int k = 0;
-                                 String deletes = "";
-                                 for(Map.Entry<String,Object> map:mapdelete.entrySet()){
-                                 if (k == 0)
-                                 deletes+=map.getKey()+"=\""+map.getValue()+"\"";
-                                 else
-                                deletes+=" , "+map.getKey()+"=\""+map.getValue()+"\"";
-                                  }
-                                 String sql = "delete from community where "+deletes+";";
-                                 writeLock.lock();
-                                 boolean istrue = !statement.execute(sql);
-                                 writeLock.unlock();
-                                return istrue;
-                                }
-                                /*这个是单个处理插入的程序,需要传入的参数是一个关于这个跟表的对象*/
-                                public boolean insertmethod(community object)throws Exception{
-
-                                 String insertbefore = "";
-                                 String insertafter = "";
-                                  int k = 0;
-                                 for (Field field : object.getClass().getFields()) {
-                                 field.setAccessible(true);
-                                 if(k == 0) {
-                                   insertbefore += field.getName();
-                                insertafter += "\""+field.get(object)+"\"";
-                                 }else{
-                                 insertbefore += ","+field.getName();
-                                 insertafter += ","+"\""+field.get(object)+"\"";
-                                 }
-                                 k++;
-                                   }
-                                 String sql = "insert into community("+insertbefore+") values("+insertafter+");";
-                                writeLock.lock();
-                                 boolean istrue = !statement.execute(sql);
-                                 writeLock.unlock();
-                                return istrue; 
-                                }
-                                /*批量处理程序，可以处理大批量的sql语句，这里没有写死只需要将包含有sql语句的字符串数组传进来就可以了 */
-                                 public boolean excuteBatch(String[] sqls) {
-                                 boolean autoCommit = false;
-
-                                 try {
-                                 autoCommit = connection.getAutoCommit();
-                                 int k = 0;
-                                writeLock.lock();
-                                 for (String sql : sqls) {
-                                 if (k>=1000){
-                                   k = 0;
-
-                                 statement.executeBatch();
-                                 connection.commit();
-
-                                }
-                                  statement.addBatch(sql);
-                                         }
-
-                                   statement.executeBatch();
-                                 connection.commit();
-                                 connection.setAutoCommit(autoCommit);
-                                 writeLock.unlock(); 
-                                 return true;
-                                 } catch (Exception e) {
-                                  try {
-                                  connection.rollback();
-                                 } catch (Exception e1) {
-                                 e1.printStackTrace();
-                                 } 
-                                  }
-                                 return false;
-                                 }
-
-
+                               .....
+                               此处省去若干代码
+                               ....
                                 }
                                 
-     2.编写自己的Controller
-         对于Models有一个需要提及的是在models中放置的是Object[],而不是object。
-        在网页端从request中拿取的数据是Vector类型的。
-        
-        请在src\main\java\MyController下简历你自己的Controller
-        /**
-         * Copyright (C), 2015-2020, XXX有限公司
-         * FileName: MyFirstControllerTest
-         * Author:   Administrator
-         * Date:     2020/02/19 10:14
-         * Description:
-         * History:
-         * <author>          <time>          <version>          <desc>
-         */
-        package MyController;
+             2.编写自己的Controller
+                 对于Models有一个需要提及的是在models中放置的是Object[],而不是object。
+                在网页端从request中拿取的数据是Vector类型的。
 
-        import Annotation_Collection.JAutowrite.Autowrite;
-        import Annotation_Collection.JController.Controller;
-        import Annotation_Collection.JParagrame.Paragrame;
-        import Annotation_Collection.RouteMap.RouteMapping;
-        import MVC_Handle.Model.Model;
-        import MVC_Handle.Model.Models;
-        import MyService.Interface.example;
-        import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
-        import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
-        import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
-        import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
+                请在src\main\java\MyController下简历你自己的Controller
 
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
-        import java.io.IOException;
-        import java.io.PrintWriter;
-        import java.util.Map;
-        /**
-         * 〈一句话功能简述〉<br> 
-         * 〈〉
-         *
-         * @author Administrator
-         * @create 2020/02/19
-         * @since 1.0.0
-         */
-        @Controller("MyFirstControllerTest")  //controller的注释
-        @RouteMapping("/controller")        //类上面的路由映射
-        public class MyFirstControllerTest {
+                @Controller("MyFirstControllerTest")  //controller的注释
+                @RouteMapping("/controller")        //类上面的路由映射
+                public class MyFirstControllerTest {
 
-            @Autowrite("exampleimpl")    //自动注入
-            public example example;
-            /*
-                针对于Springmvc应该是使用了HttpServletResponse的重定向
-                然后使用HttpServletResponse的信息填充将数据填充进去
-             */
-            @RouteMapping("/test")  //函数上面的路由映射
-            public Models   test(HttpServletResponse httpServletResponse,
-                              HttpServletRequest httpServletRequest,
-                              @Paragrame("name") String name){    //@Paragrame  参数上面的映射
-                Map<String, md> map= example.show(name);
-                if (map !=null){
+                    @Autowrite("exampleimpl")    //自动注入
+                    public example example;
+                    /*
+                        针对于Springmvc应该是使用了HttpServletResponse的重定向
+                        然后使用HttpServletResponse的信息填充将数据填充进去
+                     */
+                    @RouteMapping("/test")  //函数上面的路由映射
+                    public Models   test(HttpServletResponse httpServletResponse,
+                                      HttpServletRequest httpServletRequest,
+                                      @Paragrame("name") String name){    //@Paragrame  参数上面的映射
+                        Map<String, md> map= example.show(name);
+                        if (map !=null){
 
-                    String result = "";
-                    Models model = new Models();
-                    if (map.size()==0)
-                        model = null;
-                    else {
-                        for (Map.Entry<String, md> mdmap : map.entrySet()) {
-                            md value = mdmap.getValue();
-                            Object[] objects = {value};
-                            model.setModel("mds", objects);
+                            String result = "";
+                            Models model = new Models();
+                            if (map.size()==0)
+                                model = null;
+                            else {
+                                for (Map.Entry<String, md> mdmap : map.entrySet()) {
+                                    md value = mdmap.getValue();
+                                    Object[] objects = {value};
+                                    model.setModel("mds", objects);
+                                }
+                                model.setUrl("index");
+                            }
+                            return model;
                         }
-                        model.setUrl("index");
+                        return null;
                     }
-                    return model;
-                }
-                return null;
-            }
-            @RouteMapping("/login")
-            public Models   login(){
-                Models model = new Models();
-                model.setUrl("login");
-                return model;
-            }
-            @RouteMapping("/logining")
-            public Models   logining(HttpServletResponse httpServletResponse,
-                                HttpServletRequest httpServletRequest,
-                                @Paragrame("name") String name){
-                Models model = new Models();
-                model.setUrl("DataShow");
-                Map<String, users> login = example.login(name);
-                Map<String, mycontext> allContext = example.getAllContext(name);
-                mycontext[] mycontexts = new mycontext[allContext.size()];
-                int index = 0;
-                for(Map.Entry<String,mycontext> map:allContext.entrySet())
-                    mycontexts[index++] = map.getValue();
+                    @RouteMapping("/login")
+                    public Models   login(){
+                        Models model = new Models();
+                        model.setUrl("login");
+                        return model;
+                    }
+                    @RouteMapping("/logining")
+                    public Models   logining(HttpServletResponse httpServletResponse,
+                                        HttpServletRequest httpServletRequest,
+                                        @Paragrame("name") String name){
+                        Models model = new Models();
+                        model.setUrl("DataShow");
+                        Map<String, users> login = example.login(name);
+                        Map<String, mycontext> allContext = example.getAllContext(name);
+                        mycontext[] mycontexts = new mycontext[allContext.size()];
+                        int index = 0;
+                        for(Map.Entry<String,mycontext> map:allContext.entrySet())
+                            mycontexts[index++] = map.getValue();
 
-                model.setModel("object",mycontexts);
-                if (login.size()>0)
-                    return model;
-                else return null;
-            }
-        }
+                        model.setModel("object",mycontexts);
+                        if (login.size()>0)
+                            return model;
+                        else return null;
+                    }
+                }
        
            3.编写自己的service：在\src\main\java\MyService下
                 编写接口
-                package MyService.Interface;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
-
-                import java.util.Map;
-
                 public interface example {
                     public Map<String, md> show(String name);
                     public Map<String, users> login(String name);
@@ -570,42 +268,6 @@
                 }
 
                编写实现类
-               /**
-                 * Copyright (C), 2015-2020, XXX有限公司
-                 * FileName: exampleimpl
-                 * Author:   Administrator
-                 * Date:     2020/02/19 10:00
-                 * Description:
-                 * History:
-                 * <author>          <time>          <version>          <desc>
-                 */
-                package MyService.impl;
-
-                import Annotation_Collection.Aop.After;
-                import Annotation_Collection.Aop.Before;
-                import Annotation_Collection.JAutowrite.Autowrite;
-                import Annotation_Collection.JParagrame.Paragrame;
-                import Annotation_Collection.JService.Service;
-                import MyService.Interface.example;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.md_sql;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.mycontext_sql;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.user_sql;
-                import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.users_sql;
-
-                import java.util.HashMap;
-                import java.util.Map;
-                /**
-                 * 〈一句话功能简述〉<br>
-                 * 〈〉
-                 *
-                 * @author Administrator
-                 * @create 2020/02/19
-                 * @since 1.0.0
-                 */
                 @Service("exampleimpl")   //service层的注释
                 public class exampleimpl implements example {
 
@@ -676,35 +338,35 @@
                 System.out.println("thisis after test...");
             }
         }
-    5.用户可以自实现自己的Annotation，但是这个Annotation只能是在方法上面，即只能为AopAnnotation。在src\main\java\Annotation_Collection\MySelf下：
-        举例：
-             package Annotation_Collection.MySelf;
+           5.用户可以自实现自己的Annotation，但是这个Annotation只能是在方法上面，即只能为AopAnnotation。在src\main\java\Annotation_Collection\MySelf下：
+                举例：
+                     package Annotation_Collection.MySelf;
 
-                import java.lang.annotation.ElementType;
-                import java.lang.annotation.Retention;
-                import java.lang.annotation.RetentionPolicy;
-                import java.lang.annotation.Target;
+                        import java.lang.annotation.ElementType;
+                        import java.lang.annotation.Retention;
+                        import java.lang.annotation.RetentionPolicy;
+                        import java.lang.annotation.Target;
 
-                @Target(ElementType.METHOD)
-                @Retention(RetentionPolicy.RUNTIME)
-                public @interface myseltest {
-                    String value() default "";
+                        @Target(ElementType.METHOD)
+                        @Retention(RetentionPolicy.RUNTIME)
+                        public @interface myseltest {
+                            String value() default "";
+                        }
+          6.配置网页url的地方是E:\java\First_Web_Frame_Test\src\main\java\AllConfigure\HtmlBasePath下的HtmlBasePath.java：
+                public interface HtmlBasePath {
+                    //配置url的前缀，废弃
+                //    src/main/webapp/WEB-INF/JSP/DataShow.jsp
+                    String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\WEB-INF\\JSP\\";
+                    //配置url的后缀名
+                    String HouZhuiMing = ".jsp";
+                    String HttpPath = "/WEB-INF/JSP/"; //配置url的前缀，同时也是jsp文件放置的地方
                 }
-     6.配置网页url的地方是E:\java\First_Web_Frame_Test\src\main\java\AllConfigure\HtmlBasePath下的HtmlBasePath.java：
-        public interface HtmlBasePath {
-            //配置url的前缀，废弃
-        //    src/main/webapp/WEB-INF/JSP/DataShow.jsp
-            String BaseUrlPath = "E:\\java\\First_Web_Frame_Test\\src\\main\\webapp\\WEB-INF\\JSP\\";
-            //配置url的后缀名
-            String HouZhuiMing = ".jsp";
-            String HttpPath = "/WEB-INF/JSP/"; //配置url的前缀，同时也是jsp文件放置的地方
-        }
-      7.开始运行程序吧
-          样例1：
-                https://blog.csdn.net/qq_30761967/article/details/104432788
-          样例2：
-                https://blog.csdn.net/qq_30761967/article/details/104523956
-   
+         7.开始运行程序吧
+                  样例1：
+                        https://blog.csdn.net/qq_30761967/article/details/104432788
+                  样例2：
+                        https://blog.csdn.net/qq_30761967/article/details/104523956
+
         
         
 
