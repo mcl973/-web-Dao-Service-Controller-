@@ -36,6 +36,7 @@
      ScannerAndInstance/HandAopEvent是一个处理aop的包，用户可以自实现，但是需要继承AbstractHandleAopBean。
      ScannerAndInstance/HandleAutowriteEvent是一个处理自动注入的包，用户可以自实现，但是需要继承AbstractHandleAutowrite。
       ScannerAndInstance/HandleRouteMappEvent是一个处理Controller层路径映射，用户可以自实现，但是需要继承AbstractHandleRoutemapping。
+          
     八、SqlInit，是用来初始化数据库的。
       其中自动生成的Dao、DapSql在SqlInit/AchieveAllTableAndInstance/CreateFile/Dao、SqlInit/AchieveAllTableAndInstance/CreateFile/DaoSql
       自动生成代码可以这样：
@@ -95,7 +96,12 @@
               <servlet-name>Dispatch</servlet-name>
               <url-pattern>/</url-pattern>
               </servlet-mapping> 
-      第八步  具体的操作步骤：
+      第八步  配置idea的java：
+              file->project Structure ->Modules->Source->Language level 选择8
+              file->project Structure ->Modules->Source->Dependices 选择jdk1.8
+              file->settings->Build,Exception,Deployment->Compiler->java Compiler->per-model bytecode  version ->target bytecode version 选择1.8
+              
+      第九步  具体的操作步骤：
              1.在src/main/java/下运行test.java，这里可以创建属于你自己的Dao层文件。
                 （1）在src/main/java/AllConfigure/Sql下的MySqlParagrame.java是用来配置数据库的信息的。
                         /*
