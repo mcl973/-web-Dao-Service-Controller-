@@ -22,6 +22,10 @@ import java.lang.annotation.Target;
  * @create 2020/02/18
  * @since 1.0.0
  */
+/*
+    在给一个属性防止这个注解时必须要填写value的值。
+    相当于是将原本的spring中的autowrite和quwaire的功能给集中了。
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Autowrite {

@@ -11,6 +11,7 @@
   <%
   for(int i=0;i<objects.size();i++){
   mycontext mc = (mycontext)objects.get(i);
+  //session.getAttribute("nihao");
 %>
 <table name = "table" >
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr>username:<%=mc.username%><br></tr>

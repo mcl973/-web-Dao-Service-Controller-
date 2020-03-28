@@ -40,15 +40,18 @@ public class MyFirstControllerTest {
 
     @Autowrite("exampleimpl")
     public example example;
+    @Autowrite("TestCompolent")
+    public testInterface testCompolent;
     /*
         针对于Springmvc应该是使用了HttpServletResponse的重定向
         然后使用HttpServletResponse的信息填充将数据填充进去
      */
     @RouteMapping("/test")
-    public Models   test(HttpServletResponse httpServletResponse,
+    public Models test(HttpServletResponse httpServletResponse,
                       HttpServletRequest httpServletRequest,
                       @Paragrame("name") String name){
         Map<String, md> map= example.show(name);
+        testCompolent.test();
         if (map !=null){
 
             String result = "";
@@ -63,18 +66,20 @@ public class MyFirstControllerTest {
                 }
                 model.setUrl("index");
             }
+
             return model;
         }
+
         return null;
     }
     @RouteMapping("/login")
-    public Models   login(){
+    public Models login(){
         Models model = new Models();
         model.setUrl("login");
         return model;
     }
     @RouteMapping("/logining")
-    public Models   logining(HttpServletResponse httpServletResponse,
+    public Models logining(HttpServletResponse httpServletResponse,
                         HttpServletRequest httpServletRequest,
                         @Paragrame("name") String name){
         Models model = new Models();
@@ -91,4 +96,6 @@ public class MyFirstControllerTest {
             return model;
         else return null;
     }
+    //添加处理增删改的操作的方法
+
 }

@@ -16,9 +16,11 @@ import MVC_Handle.View.View;
 import ScannerAndInstance.AbstractBean;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -44,7 +46,20 @@ public class Handle_Post implements PostMethods{
         if (AbstractBean.getiocmap_Value(url)==null)
             return;
         //通过url获取到具体的method方法。
+        /*
+            第一种设置数据，每一个用户一个session
+            HttpSession session = req.getSession();
+            session.setAttribute("nihao",new Object());
+            jsp端通过session.getAttribute("nihao);来获取具体的数据
 
+            第二种设置数据，每一个session中都有一个上下文
+            ServletContext servletContext = req.getSession().getServletContext();
+            servletContext.setAttribute("nihao",new Object());
+            application.getAttribute("nihao");来获取具体的数据
+
+            第三种设置数据，将数据放在request中
+            也是本程序所使用放的方式。
+        */
         Models object = new GetModel().getmodel(url,req,resp);
         if (object != null) {
             View view = new View(object);

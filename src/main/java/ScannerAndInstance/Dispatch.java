@@ -16,6 +16,7 @@ import ScannerAndInstance.HandleRouteMappEvent.HandleRouteMapping;
 import ScannerAndInstance.HanleAopEvent.HandleAopBean;
 import ScannerAndInstance.Instance.InstanceBean;
 import ScannerAndInstance.Scanner.Scanner;
+import SqlInit.AbstractSql;
 import SqlInit.SqlFind.MySqlInit;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -33,6 +35,7 @@ import java.io.IOException;
  * @since 1.0.0
  */
 public class Dispatch extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -73,5 +76,20 @@ public class Dispatch extends HttpServlet {
 //        new HandleAutowrite();
         //后续还会加上一个关于RouteMapping的实现，这个明天再写
 
+    }
+
+    //最终将数据销毁
+    @Override
+    public void destroy() {
+        try {
+            AbstractSql.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            AbstractSql.statement.closeOnCompletion();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

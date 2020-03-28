@@ -16,6 +16,7 @@ import Annotation_Collection.JAutowrite.Autowrite;
 import Annotation_Collection.JController.Controller;
 import Annotation_Collection.JParagrame.Paragrame;
 import Annotation_Collection.JService.Service;
+import Annotation_Collection.NormalBean.Compolent;
 import Annotation_Collection.RouteMap.RouteMapping;
 import Annotation_Collection.Sql.Dao;
 import Annotation_Collection.Sql.DaoSql;
@@ -36,7 +37,7 @@ import java.lang.reflect.Parameter;
  * @since 1.0.0
  */
 public class GetJieXi {
-    //应该在后续的过程中添加关于多注解的解释
+    //应该在后续的过程中添加关于url映射的解释
     public static JieXiAnnotationInterface getJieXi(Class clazz){
         Annotation[] annotations = clazz.getAnnotations();
         for (Annotation annotation : annotations) {
@@ -48,6 +49,8 @@ public class GetJieXi {
                 return new JieXiService();
             else if (annotation instanceof Controller)
                 return new JieXiController();
+            else if(annotation instanceof Compolent)
+                return new JieXiCompolent();
         }
         return null;
     }
@@ -65,6 +68,7 @@ public class GetJieXi {
         return null;
     }
 
+    //方法可以使用自定义的注解，但是不要和after、before、around重复使用。
     public static JieXiAnnotationInterface getJieXi(Method method){
         Annotation[] annotations = method.getAnnotations();
         for (Annotation annotation : annotations) {

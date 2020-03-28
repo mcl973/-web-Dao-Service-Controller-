@@ -9,6 +9,7 @@
  */
 package AllConfigure.HtmlBasePath;
 
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈〉
@@ -24,5 +25,4 @@ public interface HtmlBasePath {
     //配置url的后缀名
     String HouZhuiMing = ".jsp";
     String HttpPath = "/WEB-INF/JSP/"; //配置url的前缀
-
 }

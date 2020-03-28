@@ -17,14 +17,11 @@ import Annotation_Collection.JService.Service;
 import MyService.Interface.example;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.md;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.mycontext;
-import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.user;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.Dao.users;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.md_sql;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.mycontext_sql;
-import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.user_sql;
 import SqlInit.AchieveAllTableAndInstance.CreateFile.DaoSql.users_sql;
 
-import java.util.HashMap;
 import java.util.Map;
 /**
  * 〈一句话功能简述〉<br>
@@ -82,5 +79,16 @@ public class exampleimpl implements example {
         return stringmycontextMap;
     }
 
+    //处理实务操作，失败后回滚
+    @After("MyService.AopMethods.After.TranceLation")
+    public boolean insert(mycontext mc){
+        boolean isok = false;
+        try {
+            isok = mycontext_sql.insertmethod(mc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isok;
+    }
 
 }

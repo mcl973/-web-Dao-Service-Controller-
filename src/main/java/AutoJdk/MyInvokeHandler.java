@@ -56,21 +56,23 @@ public class MyInvokeHandler extends MyHandler implements InvocationHandler {
         //开始参数的改变
         Map<String, String> hasMethodParagrame = fef.isHasMethodParagrame(method1);
         Parameter[] parameters = method1.getParameters();
-        Object[] paras = new Object[args.length];
+        if(args!=null) {//参数不为空在进行参数改变，否则之间返回null
+            Object[] paras = new Object[args.length];
 
-        for (int i = 0; i < parameters.length; i++) {
-            if (args[i]!=null){
-                //如果其类型为String则判断其值是不是为空
-                if(!((String)args[i]).equals("")){
-                    paras[i] = args[i];
-                }else if (hasMethodParagrame.containsKey(parameters[i].getName()))//查看这个参数有没有注解
+            for (int i = 0; i < parameters.length; i++) {
+                if (args[i] != null) {
+                    //如果其类型为String则判断其值是不是为空
+                    if (!((String) args[i]).equals("")) {
+                        paras[i] = args[i];
+                    } else if (hasMethodParagrame.containsKey(parameters[i].getName()))//查看这个参数有没有注解
+                        paras[i] = hasMethodParagrame.get(parameters[i].getName());
+                    else paras[i] = args[i];
+                } else if (hasMethodParagrame.containsKey(parameters[i].getName())) {
                     paras[i] = hasMethodParagrame.get(parameters[i].getName());
-                else paras[i] = args[i];
-            }else if(hasMethodParagrame.containsKey(parameters[i].getName())){
-                paras[i] = hasMethodParagrame.get(parameters[i].getName());
-            }else  paras[i] = args[i];
-        }
-        return paras;
+                } else paras[i] = args[i];
+            }
+            return paras;
+        }else return null;
     }
 
     @Override
